@@ -1,7 +1,41 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.swp
 
-# Ignore node_modules folder
+pids
+logs
+results
+tmp
+
+# Build
+public/css/main.css
+
+# Coverage reports
+coverage
+
+# API keys and secrets
+.env
+
+# Dependency directory
 node_modules
+bower_components
 
+# Editors
+.idea
+*.iml
 
-# Ignore files related to API keys
-config/dev.env
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Ignore built ts files
+dist/**/*
+
+*.swo
+*.swp
