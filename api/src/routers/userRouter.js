@@ -1,23 +1,23 @@
 const express = require("express")
 const User = require("../models/User")
 const router = new express.Router()
+const auth = require("../middlewares/auth");
 
 router.get("/users", async(req, res) => {
     try{
-        const users = await User.find()
+        const users = await User.find({})
         res.send(users)
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
 
-router.get("/user/:id", async(req, res) => {
-    const {id} = req.params
+router.get("/user/username", auth, async(req, res) => {
     try{
-        const user = await User.findById(id)
+        const user = await User.findOne(req.user._id)
         res.send(user)
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
 
@@ -27,35 +27,56 @@ router.post("/users", async(req, res) => {
         await user.save()
         res.send(user)
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
 
-router.put("/user/:id", async(req, res) => {
-    const {id} = req.params
+router.post("/login", async(req,res) => {
+    const {password, email} = req.body
+    try{
+        // from findByCredentials() return user 
+        const user = await User.findByCredentials(email, password)
+        // create token
+        const token = await user.createAuthToken()
+        res.send({user, token})
+    } catch(error) {
+        res.status(400).send({error: error.message})
+    }
+})
+
+router.post("/logout", auth, async(req, res) => {
+    try{
+        req.user.tokens = []
+        await req.user.save()
+        res.send("Log out")
+    } catch(error) {
+        res.status(400).send({error: error.message})
+    }
+});
+
+router.put("/user/username", auth, async(req, res) => {
     const updateList = Object.keys(req.body)
     const allowUpdate = ["name", "email", "password", "phoneNumber", "address", "DOB"]
 
     const isValidOperation = updateList.every((update) => allowUpdate.includes(update))
     if(!isValidOperation) return res.status(400).send("Invalid updates!")
     try{
-        const user = await User.findById(id)
-        updateList.forEach(update => user[update] = req.body[update])
-        await user.save()
-        res.send(user)
+        updateList.forEach(update => req.user[update] = req.body[update])
+        await req.user.save()
+        res.send(req.user)
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
 
-router.delete("/user/:id", async(req, res) => {
-    const {id} = req.params
+router.delete("/user/username", auth, async(req, res) => {
     try{ 
-        const user = await User.findByIdAndRemove(id)
-        res.send("Delete an user")
+        await User.findByIdAndDelete(req.user._id)
+        res.send("Successful deleted!")
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
+
 
 module.exports = router

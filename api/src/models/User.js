@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const bcrypt = require('bcrypt')
+const jwt = require("jsonwebtoken")
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -26,7 +28,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 7,
+        minlength: [7, "Your password is too short, at least having 7 characters."],
         trim: true,
         validate(value) {
             if (value.toLowerCase().includes('password')) {
@@ -54,6 +56,42 @@ const userSchema = new mongoose.Schema({
         type: String,
         format: Date,
     },
+    tokens: [{
+        type: String,
+    }],
+})
+
+userSchema.methods.createAuthToken = async function(){
+    const user = this
+
+    const token = jwt.sign({ id: user._id }, process.env.SECRET, {expiresIn: "3 days"})
+    // adding a token in tokens array
+    user.tokens.push(token)
+    await user.save()
+
+    return token;
+}
+
+userSchema.statics.findByCredentials = async(email, password) => {
+    const user = await User.findOne({email})
+
+    if(!user) throw new Error("Unable to login! Try again.")
+
+    const isMatch = await bcrypt.compare(password, user.password)
+    if(!isMatch) throw new Error("User Invalid!")
+
+    return user
+}
+
+userSchema.pre("save", async function(next) {
+    //user shows created user
+    const user = this
+    const saltRounds = 10
+    if(user.isModified("password")){
+        user.password = await bcrypt.hash(user.password, saltRounds)
+    }
+
+    next()
 })
 
 const User = mongoose.model("User", userSchema)

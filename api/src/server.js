@@ -7,7 +7,9 @@ const jobRouter = require("./routers/jobRouter")
 const newsRouter = require("./routers/newsRouter")
 const orderRouter = require("./routers/orderRouter")
 const userRouter = require("./routers/userRouter")
+
 const app = express()
+
 app.use(express.json())
 
 app.use(productRouter)
