@@ -1,60 +1,71 @@
 const express = require("express")
 const Order = require("../models/Order")
 const router = new express.Router()
+const auth = require("../middlewares/auth")
 
-router.get("/orders", async(req, res) => {
+// TO-DO: create Admin auth to create, change and delete all orders of all customers => Create ordersRouter!
+
+// User can access the own orders
+router.get("/user/orders", auth, async(req, res) => {
     try{
-        const orders = await Order.find()
-        res.send(orders)
+        await req.user.populate("orders")
+        res.send(req.user.orders)
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
 
-router.get("/order/:id", async(req, res) => {
+router.get("/user/order/:id", auth, async(req, res) => {
     const {id} = req.params
     try{
-        const order = await Order.findById(id)
+        const order = await Order.findOne({id, owner: req.user._id})
+        if(!order) return res.status(404).send()
         res.send(order)
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
 
-router.post("/orders", async(req, res) => {
-    const order = new Order(req.body)
+router.post("/user/orders", auth, async(req, res) => {
     try{
+        const order = await new Order({
+            ...req.body,
+            owner: req.user._id,
+        })
         await order.save()
         res.send(order)
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
 
-router.put("/order/:id", async(req, res) => {
+router.put("/user/order/:id", auth, async(req, res) => {
     const {id} = req.params
+
     const updateList = Object.keys(req.body)
-    const allowUpdate = ["orderId", "nameCustomer","addressPoint", "timeOrder", "timeTakeOrder", "status", "listProducts"]
+    const allowUpdate = ["orderId", "owner","addressPoint", "timeOrder", "timeTakeOrder", "status", "listProducts"]
 
     const isValidOperation = updateList.every((update) => allowUpdate.includes(update))
     if(!isValidOperation) return res.status(400).send("Invalid updates!")
     try{
-        const order = await Order.findById(id)
+        const order = await Order.findOne({id, owner: req.user._id})
+        if(!order) return res.status(404).send()
+
         updateList.forEach(update => order[update] = req.body[update])
         await order.save()
         res.send(order)
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
 
-router.delete("/order/:id", async(req, res) => {
+router.delete("/user/order/:id", auth, async(req, res) => {
     const {id} = req.params
     try{ 
-        const order = await Order.findByIdAndRemove(id)
-        res.send("Delete an order ")
+        await Order.findOneAndDelete({id, owner: req.user._id})
+        res.send("Deleted an order ")
     }catch(error) {
-        res.status(400).send(error.message)
+        res.status(400).send({error: error.message})
     }
 })
 

@@ -2,6 +2,8 @@ const express = require("express")
 const Job = require("../models/Job")
 const router = new express.Router()
 
+// TO-DO: create Admin auth to create, change and delete jobs 
+
 router.get("/jobs", async(req, res) => {
     try{
         const jobs = await Job.find()
@@ -20,7 +22,7 @@ router.get("/job/:id", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-
+// Admin
 router.post("/jobs", async(req, res) => {
     const job = new Job(req.body)
     try{
@@ -30,7 +32,7 @@ router.post("/jobs", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-
+// Admin
 router.put("/job/:id", async(req, res) => {
     const {id} = req.params
     const updateList = Object.keys(req.body)
@@ -47,7 +49,7 @@ router.put("/job/:id", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-
+// Admin
 router.delete("/job/:id", async(req, res) => {
     const {id} = req.params
     try{ 

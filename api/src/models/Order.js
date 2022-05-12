@@ -2,26 +2,23 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 
 const orderSchema = new mongoose.Schema({
+    // expect: orderId can count automatically
     orderId:{
         required: true,
         type: String,
         trim: true,
     }, 
-    nameCustomer:{
+    // connect User collection
+    owner:{
         required: true,
-        type: String,
-        trim: true,
-        minlength: [4, "The name is too short, at least 4 characters"]
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     }, 
     addressPoint:{
         required: true,
         type: String,
         trim: true,
     }, 
-    timeOrder:{
-        type: Date,
-        default: () => new Date().toGMTString()
-    },
     timeTakeOrder:{
         required: true,
         type: String,
@@ -58,7 +55,9 @@ const orderSchema = new mongoose.Schema({
         type: Number,
     },
     
-})
+    },
+    { timestamps: true }
+)
 
 const Order = mongoose.model("Order", orderSchema)
 

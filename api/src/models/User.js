@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken")
+const Order = require('./Order')
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -61,6 +62,13 @@ const userSchema = new mongoose.Schema({
     }],
 })
 
+// Relationship between User and Order
+userSchema.virtual("orders", {
+    ref: 'Order',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 // Hide private info
 userSchema.methods.toJSON = function() {
     const user = this
@@ -104,6 +112,13 @@ userSchema.pre("save", async function(next) {
 
     next()
 })
+
+// Delete all orders before delete user
+userSchema.pre("remove", async function(next) {
+    const user = this;
+    await Order.deleteMany({owner: user._id});
+    next();
+}); 
 
 const User = mongoose.model("User", userSchema)
 

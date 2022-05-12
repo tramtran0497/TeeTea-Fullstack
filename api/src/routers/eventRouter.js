@@ -2,6 +2,9 @@ const express = require("express")
 const Event = require("../models/Event")
 const router = new express.Router()
 
+
+// TO-DO: create Admin auth to create, change and delete events 
+
 router.get("/events", async(req, res) => {
     try{
         const events = await Event.find()
@@ -20,7 +23,7 @@ router.get("/event/:id", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-
+// Admin
 router.post("/events", async(req, res) => {
     const event = new Event(req.body)
     try{
@@ -30,7 +33,7 @@ router.post("/events", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-
+// Admin
 router.put("/event/:id", async(req, res) => {
     const {id} = req.params
     const updateList = Object.keys(req.body)
@@ -47,7 +50,7 @@ router.put("/event/:id", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-
+// Admin
 router.delete("/event/:id", async(req, res) => {
     const {id} = req.params
     try{ 
