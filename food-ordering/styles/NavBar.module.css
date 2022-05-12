@@ -1,0 +1,75 @@
+
+.container{
+    width: 100vw;
+    height: 100px;
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+}
+
+.left{
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center{
+    width: 40%;
+}
+
+.listItems{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.item{
+    width: fit-content;
+    font-size: 20px;
+    padding-bottom: 3px;
+    cursor: pointer;
+    border: none;
+    transition-delay: 0.15s;
+}
+
+.item:hover{
+    border-bottom: 2px solid black;
+}
+
+.right{
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.left h1{
+    cursor: pointer;
+}
+
+.icon{
+    font-size: 25px;
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.qtyCart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 22px;
+    right: 88px;
+    background-color: white;
+    border-radius: 50%;
+}

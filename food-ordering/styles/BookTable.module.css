@@ -1,0 +1,73 @@
+.container{
+    margin-top: 100px;
+    width: 100vw;
+    height: calc(50vh - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper{
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper h1{
+    width: 60%;
+    text-align: start;
+}
+
+.phoneIcon{
+    font-size: 35px;
+    color: rgb(112, 221, 185);
+    width: 15%;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate(0, 0, 0);
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate(-1px, 0);
+    }
+    
+    20%, 80% {
+      transform: translate(2px, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate(-4px, 0);
+    }
+  
+    40%, 60% {
+      transform: translate(4px, 0);
+    }
+}
+
+.content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content .icon{
+    font-size: 12px;
+    width: 10%;
+}
+
+.content p {
+    width: 50%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.container .command {
+    font-size: 15px;
+    font-style: italic;
+    color: rgb(43, 161, 122);
+}

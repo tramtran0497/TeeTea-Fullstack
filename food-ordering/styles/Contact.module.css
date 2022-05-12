@@ -1,0 +1,57 @@
+
+.container{
+    height: calc(100vh - 100px);
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-size: 50px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.subTil{
+    font-style: italic;
+    color: rgb(99, 97, 97);
+    margin-bottom: 30px;
+}
+
+.wrapper{
+    width: 60%;
+    height: 50%;
+}
+
+.input, .select{
+    width: 40%;
+    margin: 2.5% 5%;
+    font-size: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+.input, .select:focus-visible{
+    outline-color: transparent;
+}
+
+.btn{
+    width: 10%;
+    font-size: 15px;
+    padding: 10px 20px;
+    margin-left: 35%;   
+    border: 1px solid black;
+    border-radius: 10px; 
+    transition: all .25s ease-in; 
+    cursor: pointer;   
+    background-color: transparent;
+}
+
+.btn:hover{
+    border: 1px solid aquamarine;
+    background-color: aquamarine;
+}

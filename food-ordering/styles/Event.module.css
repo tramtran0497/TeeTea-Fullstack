@@ -1,0 +1,68 @@
+.container{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container h1{
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.eventCards{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.eventCard{
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin: 20px 0;
+}
+
+.left{
+    width: 33%;
+}
+
+.img{
+    width: 100%;
+    object-fit: contain;
+}
+
+.right{
+    width: 63%;
+}
+
+.right h3{
+    font-size: 30px;
+    font-weight: 400;
+    margin: 10px 0px;
+}
+
+.right p{
+    font-size: 17px;
+    text-align: justify;
+    letter-spacing: .25px;
+}
+
+.dots{
+    font-size: 15px;
+    color: rgb(27, 168, 121);
+    cursor: pointer;
+    transition: all .5s ease-in;
+}
+
+.dots:hover{
+    text-decoration: underline;
+}
+
+.more{
+    font-size: 17px;
+    text-align: justify;
+    letter-spacing: .25px;
+}

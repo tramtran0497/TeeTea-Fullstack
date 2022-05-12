@@ -1,0 +1,52 @@
+.container{
+    margin-top: 100px;
+    width: 100vw;
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+}
+
+.wrapper h1{
+    text-align: center;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.wrapper h1 .icon{
+    margin-right: 20px;
+    font-size: 35px;
+    color: rgb(53, 148, 116);
+}
+
+.content{
+    width: 100%;
+}
+
+.content ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content ul li{
+    border: 1px solid rgb(42, 161, 122);
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: rgb(42, 161, 122);
+    transition: all .25s ease;
+    cursor: pointer;
+}
+
+.content ul li:hover{
+    background-color:  rgb(42, 161, 122);
+    color: white;
+}

@@ -1,0 +1,123 @@
+.container:before{
+    content: "";
+    width: 100%;
+    height: calc(160vh - 100px);
+    position: absolute;
+    z-index: 1;
+    background-color: black;
+    opacity: 0.85;
+}
+
+.container{
+    margin-top: 100px;
+    height: calc(160vh - 100px);
+    background-image: url("https://images.unsplash.com/photo-1500898335608-a4b6696f81a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper{
+    width: 80%;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper h1{
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.cards{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card{
+    width: 30%;
+    height: 75vh;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.imgWrapper{
+    width: 100%;
+    height: 200px;
+}
+
+.card h2{
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.card ul{
+    width: 100%;
+}
+
+.card li{
+    padding: 10px 20px 10px 0;
+    text-align: justify;
+    letter-spacing: .5px;
+}
+
+.card p {
+    padding-left: 20px;
+}
+
+.btn{
+    width: 200px;
+    padding: 10px 20px;
+    margin: 30px 50px;
+    font-weight: 500;
+    border: 1px solid aquamarine;
+    color: rgb(20, 128, 92);
+    cursor: pointer;
+    transition: all .5 ease-in;
+    background-color: transparent;
+}   
+
+.btn:hover{
+    color: black;
+    background-color: aquamarine;
+}
+
+.formApplyJob{
+    margin-top: 50px;
+    width: 80%;
+    z-index: 1;
+}
+
+.formApplyJob form{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.formApplyJob form input, 
+.formApplyJob form textarea{
+    width: 40%;
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 15px;
+    letter-spacing: .5px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.formApplyJob form input, 
+.formApplyJob form textarea:focus-visible{
+    outline-color: transparent;
+}

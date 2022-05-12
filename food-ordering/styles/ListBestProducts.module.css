@@ -1,0 +1,47 @@
+.container{
+    margin-top: 130px;
+    width: 100%;
+    height: max-content;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    width: 90%;
+}
+
+.title h2{
+    font-size: 60px;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.title p{
+    font-size: 20px;
+    text-align: center;
+
+}
+
+.listProducts{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.listDrinks, .listFoods{
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.listFoods{
+    margin-bottom: 80px;
+    border-bottom: 2px solid aquamarine;
+}
+
+

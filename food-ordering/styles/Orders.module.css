@@ -1,0 +1,92 @@
+.container{
+    margin-top: 100px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.currentOrders{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.currentOrders h2{
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.command{
+    background-color: rgb(226, 137, 114);
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+}
+
+.orderProcess{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.step{
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: rgb(219, 255, 243);
+}
+
+.icon{
+    font-size: 30px;
+
+}
+
+.historyList{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.historyList h2{
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.historyList ul{
+    width: 80%;
+    list-style:none;
+    text-align: center;
+}
+
+.historyList ul li{
+    height: 30px;
+    margin: 20px 0;
+    font-size: 18px;
+    transition: all .4s ease;
+    cursor: pointer;
+}
+
+.historyList ul li:hover{
+    text-decoration: underline;
+}
+
+.historyList ul li span{
+    font-style: italic;
+    font-size: 15px;
+}
+
+

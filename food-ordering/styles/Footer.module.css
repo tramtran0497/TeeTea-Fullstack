@@ -1,0 +1,131 @@
+
+.container{
+    height: 400px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(206, 248, 234);
+}
+
+.left{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.openTime{
+    width: 80%;
+    text-align: center;
+}
+
+.openTime h2{
+    font-size: 25px;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.listStores{
+    width: 80%;
+    text-align: center;
+
+}
+
+.listStores h4{
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.center{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.list{
+    list-style: none;
+}
+
+.listItem{
+    width: fit-content;
+    margin: 5px 0;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: all .25s ease;
+    position: relative;
+    text-align: start;
+}
+
+.listItem:hover{
+    background-color: aquamarine;
+}
+
+.showPhoneNum{
+    width: 250px;
+    position: absolute;
+    top: 5px;
+    left: 110px;
+    text-decoration: underline;
+}
+
+.listItem.bookTable .showPhoneNum{
+    display: none;
+}
+
+.listItem.bookTable:hover .showPhoneNum{
+    display: block;
+}
+
+.right{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+.contact{
+    width: 60%;
+    height: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+.contactIcons{
+    width: 20%;
+    font-size: 30px;
+}
+
+.phoneNum{
+    width: 70%;
+    padding-left: 20px ;
+    font-size: 18px;
+}
+
+.listIcons{
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 20px;
+
+}
+
+.icons{
+    font-size: 25px;
+    margin: 20px 10px;
+    cursor: pointer;
+}
+
+.right h6{
+    text-align: end;
+    margin-right: 30px;
+}
