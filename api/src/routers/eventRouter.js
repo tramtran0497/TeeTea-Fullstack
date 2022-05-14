@@ -1,9 +1,8 @@
 const express = require("express")
 const Event = require("../models/Event")
 const router = new express.Router()
-
-
-// TO-DO: create Admin auth to create, change and delete events 
+const auth = require("../middlewares/auth")
+const adminAuth = require("../middlewares/adminAuth")
 
 router.get("/events", async(req, res) => {
     try{
@@ -23,8 +22,8 @@ router.get("/event/:id", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-// Admin
-router.post("/events", async(req, res) => {
+
+router.post("/events", [auth, adminAuth], async(req, res) => {
     const event = new Event(req.body)
     try{
         await event.save()
@@ -33,8 +32,8 @@ router.post("/events", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-// Admin
-router.put("/event/:id", async(req, res) => {
+
+router.put("/event/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     const updateList = Object.keys(req.body)
     const allowUpdate = ["title", "firstWord","description"]
@@ -50,8 +49,8 @@ router.put("/event/:id", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-// Admin
-router.delete("/event/:id", async(req, res) => {
+
+router.delete("/event/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     try{ 
         const event = await Event.findByIdAndRemove(id)

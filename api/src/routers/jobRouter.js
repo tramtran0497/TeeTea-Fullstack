@@ -1,8 +1,8 @@
 const express = require("express")
 const Job = require("../models/Job")
 const router = new express.Router()
-
-// TO-DO: create Admin auth to create, change and delete jobs 
+const auth = require("../middlewares/auth")
+const adminAuth = require("../middlewares/adminAuth")
 
 router.get("/jobs", async(req, res) => {
     try{
@@ -22,8 +22,8 @@ router.get("/job/:id", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-// Admin
-router.post("/jobs", async(req, res) => {
+
+router.post("/jobs", [auth, adminAuth], async(req, res) => {
     const job = new Job(req.body)
     try{
         await job.save()
@@ -32,8 +32,8 @@ router.post("/jobs", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-// Admin
-router.put("/job/:id", async(req, res) => {
+
+router.put("/job/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     const updateList = Object.keys(req.body)
     const allowUpdate = ["title", "quantity","description"]
@@ -49,8 +49,8 @@ router.put("/job/:id", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-// Admin
-router.delete("/job/:id", async(req, res) => {
+
+router.delete("/job/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     try{ 
         const job = await Job.findByIdAndRemove(id)

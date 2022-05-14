@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     name:{
         required: true,
         type: String,
-        minlength: [4, "The name of product is at least 4 characters, please try again!"],
+        minlength: [4, "The name of user is at least 4 characters, please try again!"],
         trim: true,
     }, 
     email:{
@@ -39,13 +39,14 @@ const userSchema = new mongoose.Schema({
     },
     phoneNumber:{
         required: true,
-        type: Number,
+        unique: true,
+        type: String,
         isNumeric: true,
-        isMobilePhone: {
-            options: ['fi-FI'],
-            errorMessage: 'Must provide a valid Finland phone number.'
-        },
-        errorMessage: 'Must provide a valid phone number.'
+        validate(value) {
+            if (!validator.isMobilePhone(value, 'fi-FI')) {
+             throw new Error('Phone is invalid');
+            }
+        }
     },
     address:{
         required: true,
@@ -60,6 +61,9 @@ const userSchema = new mongoose.Schema({
     tokens: [{
         type: String,
     }],
+    isAdmin: {
+        type: Boolean,
+    }
 })
 
 // Relationship between User and Order
@@ -83,7 +87,7 @@ userSchema.methods.toJSON = function() {
 userSchema.methods.createAuthToken = async function(){
     const user = this
 
-    const token = jwt.sign({ id: user._id }, process.env.SECRET, {expiresIn: "3 days"})
+    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin}, process.env.SECRET, {expiresIn: "3 days"})
     // adding a token in tokens array
     user.tokens.push(token)
     await user.save()

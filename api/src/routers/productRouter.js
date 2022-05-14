@@ -1,6 +1,8 @@
 const express = require("express")
 const Product = require("../models/Product")
 const router = new express.Router()
+const auth = require("../middlewares/auth")
+const adminAuth = require("../middlewares/adminAuth")
 
 router.get("/products", async(req, res) => {
     try{
@@ -21,7 +23,7 @@ router.get("/product/:id", async(req, res) => {
     }
 })
 
-router.post("/products", async(req, res) => {
+router.post("/products", [auth, adminAuth], async(req, res) => {
     const product = new Product(req.body)
     try{
         await product.save()
@@ -31,7 +33,7 @@ router.post("/products", async(req, res) => {
     }
 })
 
-router.put("/product/:id", async(req, res) => {
+router.put("/product/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     const updateList = Object.keys(req.body)
     const allowUpdate = ["name", "type", "size", "price", "extra", "description", "ingredients"]
@@ -48,7 +50,7 @@ router.put("/product/:id", async(req, res) => {
     }
 })
 
-router.delete("/product/:id", async(req, res) => {
+router.delete("/product/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     try{ 
         const product = await Product.findByIdAndRemove(id)

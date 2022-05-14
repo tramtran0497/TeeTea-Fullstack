@@ -2,10 +2,8 @@ const express = require("express")
 const Order = require("../models/Order")
 const router = new express.Router()
 const auth = require("../middlewares/auth")
+const adminAuth = require("../middlewares/adminAuth")
 
-// TO-DO: create Admin auth to create, change and delete all orders of all customers => Create ordersRouter!
-
-// User can access the own orders
 router.get("/user/orders", auth, async(req, res) => {
     try{
         await req.user.populate("orders")
@@ -39,7 +37,7 @@ router.post("/user/orders", auth, async(req, res) => {
     }
 })
 
-router.put("/user/order/:id", auth, async(req, res) => {
+router.put("/user/order/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
 
     const updateList = Object.keys(req.body)
@@ -59,7 +57,7 @@ router.put("/user/order/:id", auth, async(req, res) => {
     }
 })
 
-router.delete("/user/order/:id", auth, async(req, res) => {
+router.delete("/user/order/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     try{ 
         await Order.findOneAndDelete({id, owner: req.user._id})
