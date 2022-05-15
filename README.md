@@ -3,11 +3,12 @@
 ## To Do Tasks
 ### API
 1. Installing `multer` and `sharp` npm to upload images, avatar for User, Products,...
-2. Adding features: sort, filter and setup limit, skip,.. data. 
-3. Adding sending email feature when sign up/ delete/ make an order/ confirm emails by `SendGrid` service.
-4. Creating Admin authenticate middleware. DONE
-5. Creating Jest test for all method get/post/put/delete and running test.
-6. Typing data.
+2. Connect MongoDB CLoud  to place data. `DONE`
+3. Adding features: sort, filter and setup limit, skip,.. data. 
+4. Adding sending email feature when sign up/ delete/ make an order/ confirm emails by `SendGrid` service.
+5. Creating Admin authenticate middleware. `DONE`
+6. Creating Jest test for all method get/post/put/delete and running test.
+7. Typing data.
 
 
 ### Client: food-ordering

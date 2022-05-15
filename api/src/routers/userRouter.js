@@ -1,7 +1,8 @@
 const express = require("express")
 const User = require("../models/User")
 const router = new express.Router()
-const auth = require("../middlewares/auth");
+const auth = require("../middlewares/auth")
+const sendWelcomeNewbie = require("../email/welcomeNewbie")
 
 // I did not place auth and adminAuth yet!! 
 router.get("/users", async(req, res) => {
@@ -26,6 +27,8 @@ router.post("/users", async(req, res) => {
     const user = new User(req.body)
     try{
         await user.save()
+        sendWelcomeNewbie(user.email, user.name)
+       
         res.send(user)
     }catch(error) {
         res.status(400).send({error: error.message})
