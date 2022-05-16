@@ -26,7 +26,7 @@ router.post("/user/username/avatar", auth, upload.single("avatar"), async(req, r
     const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
     req.user.avatar = buffer 
     await req.user.save()
-    res.send(req.user)
+    res.send("Uploaded your avatar!")
     }, (error, req, res, next) => {
         res.status(400).send({error: error.message})
     }
@@ -46,6 +46,16 @@ router.get("/user/:id/avatar", async(req, res) => {
         res.status(404).send({error: error.message});
     }
 }) 
+
+router.delete("/user/username/avatar", auth, async(req, res) => {
+    try{
+        req.user.avatar = undefined;
+        await req.user.save();
+        res.send("Successfully Delete Avatar!")
+    } catch(error) {
+        res.status(500).send({error: error.message});
+    }
+})
 
 // I did not place auth and adminAuth yet!! 
 router.get("/users", async(req, res) => {
