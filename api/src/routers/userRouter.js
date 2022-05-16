@@ -3,6 +3,34 @@ const User = require("../models/User")
 const router = new express.Router()
 const auth = require("../middlewares/auth")
 const sendWelcomeNewbie = require("../email/welcomeNewbie")
+const multer = require('multer')
+const { runInNewContext } = require("vm")
+
+// Setup upload images
+const upload = multer({
+    dest: 'uploads/',
+    // Image can not over 1MB
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if(!file.originalname.match(/\.(jpg|png|jpeg)$/)) {
+            return cb(new Error("Please upload file with extension jpeg, png, jpg"));
+        }
+        cb(undefined, true);
+    }
+})
+
+// Post user avatar 
+
+router.post("/user/username/avatar", auth, upload.single("avatar"), async(req, res) => {
+    req.user.avatar = req.file.buffer
+    // await req.user.save()
+    res.send(req.user)
+    }, (error, req, res, next) => {
+        res.status(400).send({error: error.message})
+    }
+)
 
 // I did not place auth and adminAuth yet!! 
 router.get("/users", async(req, res) => {
@@ -28,7 +56,7 @@ router.post("/users", async(req, res) => {
     try{
         await user.save()
         sendWelcomeNewbie(user.email, user.name)
-       
+        
         res.send(user)
     }catch(error) {
         res.status(400).send({error: error.message})
