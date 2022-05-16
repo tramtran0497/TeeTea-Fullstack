@@ -4,11 +4,10 @@ const router = new express.Router()
 const auth = require("../middlewares/auth")
 const sendWelcomeNewbie = require("../email/welcomeNewbie")
 const multer = require('multer')
-const { runInNewContext } = require("vm")
+const sharp = require("sharp")
 
 // Setup upload images
 const upload = multer({
-    dest: 'uploads/',
     // Image can not over 1MB
     limits: {
         fileSize: 1000000
@@ -22,15 +21,31 @@ const upload = multer({
 })
 
 // Post user avatar 
-
 router.post("/user/username/avatar", auth, upload.single("avatar"), async(req, res) => {
-    req.user.avatar = req.file.buffer
-    // await req.user.save()
+    // config image with size and type image png
+    const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
+    req.user.avatar = buffer 
+    await req.user.save()
     res.send(req.user)
     }, (error, req, res, next) => {
         res.status(400).send({error: error.message})
     }
 )
+
+// Get an avatar without auth
+router.get("/user/:id/avatar", async(req, res) => {
+    try{
+        const user = await User.findById(req.params.id);
+        if(!user || !user.avatar) {
+            throw new Error("It seems your user is invalid or you have no an image!")
+        };
+        // setting content type images/png
+        res.set("Content-Type", "image/png");
+        res.send(user.avatar)
+    } catch(error) {
+        res.status(404).send({error: error.message});
+    }
+}) 
 
 // I did not place auth and adminAuth yet!! 
 router.get("/users", async(req, res) => {
