@@ -37,8 +37,8 @@ export const Footer = () => {
                     </Link>
                 </ul>
                 <ul className={styles.list}>
-                    <Link href="/deliveryPolicy">
-                        <li className={styles.listItem}>Delivery Policy</li>       
+                    <Link href="/deliveryServices">
+                        <li className={styles.listItem}>Delivery Services</li>       
                     </Link>
                     <Link href="/menu">
                         <li className={styles.listItem}>Gifts</li>       

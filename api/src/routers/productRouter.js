@@ -3,6 +3,8 @@ const Product = require("../models/Product")
 const router = new express.Router()
 const auth = require("../middlewares/auth")
 const adminAuth = require("../middlewares/adminAuth")
+const multer = require('multer')
+const sharp = require("sharp")
 
 router.get("/products", async(req, res) => {
     try{
@@ -22,7 +24,6 @@ router.get("/product/:id", async(req, res) => {
         res.status(400).send(error.message)
     }
 })
-
 router.post("/products", [auth, adminAuth], async(req, res) => {
     const product = new Product(req.body)
     try{

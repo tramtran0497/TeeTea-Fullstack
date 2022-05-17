@@ -34,7 +34,10 @@ const productSchema = new mongoose.Schema({
     ingredients:[{
         type: String,
         trim: true,
-    }]
+    }],
+    image: {
+        type: Buffer
+    }
 })
 
 const Product = mongoose.model("Product", productSchema)
