@@ -9,7 +9,7 @@ const orderRouter = require("./routers/orderRouter")
 const userRouter = require("./routers/userRouter")
 
 const app = express()
-
+// Middleware
 app.use(express.json())
 
 app.use(productRouter)

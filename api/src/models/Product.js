@@ -15,29 +15,31 @@ const productSchema = new mongoose.Schema({
     }, 
     size:[{
         type: String,
-        default: "One size",
         enum: ["S", "M", "L"],
     }],
     price:[{
         required: true,
-        type: Number,
+        type: Number, 
     }],
-    extra:[{
+    extra:{
         type: String,
         default: "This dish have no extra services.",
         trim: true,
-    }],
+    },
     description:{
         type: String,
         trim: true,
     },
-    ingredients:[{
+    ingredients:{
         type: String,
         trim: true,
-    }],
+    },
     image: {
-        type: Buffer
-    }
+        type: String,
+    },
+    cloudinary_id: {
+        type: String,
+    },
 })
 
 const Product = mongoose.model("Product", productSchema)
