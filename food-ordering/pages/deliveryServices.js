@@ -17,32 +17,55 @@ export default function deliveryServices(){
             <div className={styles.serviceWrapper}>
               <h4>Delivery F&B</h4>
               <div className={styles.serviceContent}>
-                We have 2 options delivery services, you can choose the best for your case:
-                - TeeTea service: 
-                - Others services:
+                <p>There are two options delivery services:</p>
+                <h5>TeeTea Service: </h5>
+                <p> - You click "Delivery" button status when ordering!</p>
+                <p> - Only using local area (about 10km) with 20 minutes each order.</p>
+                <p> - Free FIRST 3 TIMES!!! (with new account).</p>
+                <p> - Cost: (the price of each delivery depends on your location).</p>
+                <h5>Other services:</h5>
+                <p> Create your account and you receive codeFREE for first delivery!</p>
               </div>
             </div>
 
             <div className={styles.serviceWrapper}>
               <h4>Delivery Gifts for friends and family</h4>
               <div className={styles.serviceContent}>
-                This is the specialist service at TeeTea Restaurant! We help you to bring all the best to your friends and your family.
-
+              <p>The specialist service at TeeTea Restaurant!</p>
+                <p>Let's us help you to bring all the best to your friends and your family!</p>
+                <p> - You click "Gifts for Friends and Family" button status when ordering!</p>
+                <p> - Only using local area (about 10km) with 20 minutes each order.</p>
+                <p> - Cost: (the price of each delivery depends on your location).</p>
+                <p> - Free FIRST TIME!!! (with new account).</p>
+                <p> - Extra services: F&B Gifts, Party, Events,..</p>
               </div>
             </div>
 
             <div className={styles.serviceWrapper}>
               <h4>Delivery Times</h4>
               <div className={styles.serviceContent}>
-                Who needs this services? You're busy, you can not handle cooking and preparing your meal! Don't worry, we always support you by our services.
-                With this service, you can choose buy 10 times delivery with saving price!!! 
+              <h5>Who needs this services?</h5>
+              <p>You're busy, you can not handle cooking and preparing your meal!</p>
+              <h5>There are three options:</h5>
+                <p> - 3 times: Saving money 10% compared to normal delivery.</p>
+                <p> - 5 times: Saving money 20% compared to normal delivery.</p>
+                <p> - 10 times: Saving money 30% compared to normal delivery.</p>
+                <p> - Cost: (the price of each delivery depends on your location).</p>
+                <p> - Note: The same address point each option!</p>
+                <p> - Free FIRST TIME OF EACH OPTION!!! (with new account).</p>
               </div>
             </div>
 
             <div className={styles.serviceWrapper}>
               <h4>Delivery Monthly</h4>
               <div className={styles.serviceContent}>
-                If "Delivery Times" is not enough! why don't you choose this service? Saving more money with delivery monthly, weekly, daily. 
+              <h5>How about Delivery Monthly?</h5>
+              <p>If "Delivery Times" is not enough! why don't you choose this service? Saving more money with delivery monthly, weekly, daily. </p>
+              <h5>Montly Service:</h5>
+                <p> - Saving money 40% compared to normal delivery.</p>
+                <p> - Cost: (the price of each delivery depends on your location).</p>
+                <p> - Note: The same address point each option!</p>
+                <p> - Free FIRST TIME!!! (with new account).</p>
               </div>
             </div>
           </ul>

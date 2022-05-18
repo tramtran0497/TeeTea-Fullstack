@@ -2,7 +2,7 @@
 
 ## To Do Tasks
 ### API
-1. Installing `multer` and `sharp` npm to upload images, avatar for User, Products,...
+1. Installing `multer` and `sharp` npm to upload images, avatar for User, Products,... (Done User)
 2. Connect MongoDB CLoud  to place data. `DONE`
 3. Adding features: sort, filter and setup limit, skip,.. data. 
 4. Adding sending email feature when sign up/ delete/ make an order/ confirm emails by `SendGrid` service.
@@ -19,7 +19,7 @@ Current:
 - Forms should be refactored and can communicate with API.
 
 #### Having no account
-1. Designing and creating content for `Delivery Policy and Services`.
+1. Designing and creating content for `Delivery Policy and Services`. (Done, but lack of feature click label => showing content)
 2. Application job form is sent directly the TeeTea email and response confirm email through `Emailjs`.
 3. Fetching data method get all products/ news/ events/ jobs from API.
 4. Setup saving list cart, theme at local storage. 
