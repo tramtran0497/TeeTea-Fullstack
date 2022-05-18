@@ -5,6 +5,7 @@ const auth = require("../middlewares/auth")
 const sendWelcomeNewbie = require("../email/welcomeNewbie")
 const multer = require('multer')
 const sharp = require("sharp")
+const informDeleteAccount = require("../email/InformDeleteAccount")
 
 // Setup upload images
 const upload = multer({
@@ -25,7 +26,7 @@ router.post("/user/username/avatar", auth, upload.single("avatar"), async(req, r
     // config image with size and type image png
     const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
     req.user.avatar = buffer 
-    console.log(req.file)
+    console.log("AVATAR",req.file)
     await req.user.save()
     res.send("Uploaded your avatar!")
     }, (error, req, res, next) => {
@@ -130,6 +131,7 @@ router.put("/user/username", auth, async(req, res) => {
 router.delete("/user/username", auth, async(req, res) => {
     try{ 
         await User.findByIdAndDelete(req.user._id)
+        informDeleteAccount(req.user.email, req.user.name)
         res.send("Successful deleted!")
     }catch(error) {
         res.status(400).send({error: error.message})

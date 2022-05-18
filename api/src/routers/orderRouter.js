@@ -3,6 +3,7 @@ const Order = require("../models/Order")
 const router = new express.Router()
 const auth = require("../middlewares/auth")
 const adminAuth = require("../middlewares/adminAuth")
+const confirmNewOrder = require("../email/confirmNewOrder")
 
 router.get("/user/orders", auth, async(req, res) => {
     try{
@@ -31,6 +32,7 @@ router.post("/user/orders", auth, async(req, res) => {
             owner: req.user._id,
         })
         await order.save()
+        confirmNewOrder(order.orderId, req.user.name)
         res.send(order)
     }catch(error) {
         res.status(400).send({error: error.message})
