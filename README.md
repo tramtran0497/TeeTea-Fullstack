@@ -8,7 +8,7 @@
 4. Adding sending email feature when sign up/ delete/ make an order/ confirm emails by `SendGrid` service. `DONE`
 5. Creating Admin authenticate middleware. `DONE`
 6. Creating Jest test for all method get/post/put/delete and running test.
-7. Connect `Cloudiary` to store images, using for Products, Events, News, Jobs and so on.
+7. Connect `Cloudinary` to store images, using for Products, Events, News, Jobs and so on. `DONE`
 8. Typing data.
 
 

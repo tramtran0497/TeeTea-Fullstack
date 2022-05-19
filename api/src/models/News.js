@@ -13,6 +13,13 @@ const newsSchema = new mongoose.Schema({
         type: String,
         trim: true,
     }, 
+    image: {
+        type: String,
+        required: true,
+    },
+    cloudinary_id: {
+        type: String,
+    },
 })
 
 const News = mongoose.model("News", newsSchema)

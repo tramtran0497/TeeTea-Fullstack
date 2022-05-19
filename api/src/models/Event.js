@@ -18,6 +18,13 @@ const eventSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
+    image: {
+        type: String,
+        required: true,
+    },
+    cloudinary_id: {
+        type: String,
+    },
 })
 
 const Event = mongoose.model("Event", eventSchema)

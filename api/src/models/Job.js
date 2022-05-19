@@ -16,6 +16,13 @@ const jobSchema = new mongoose.Schema({
         type: String,
         trim: true,
     }],
+    image: {
+        type: String,
+        required: true,
+    },
+    cloudinary_id: {
+        type: String,
+    },
 })
 
 const Job = mongoose.model("Job", jobSchema)
