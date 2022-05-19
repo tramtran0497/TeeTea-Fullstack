@@ -8,10 +8,10 @@ const jobSchema = new mongoose.Schema({
         minlength: [4, "The title of a job is at least 4 characters, please try again!"],
         trim: true,
     }, 
-    quantity:[{
+    quantity:{
         required: true,
         type: Number,
-    }],
+    },
     description:[{
         type: String,
         trim: true,

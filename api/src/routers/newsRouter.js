@@ -3,6 +3,8 @@ const News = require("../models/News")
 const router = new express.Router()
 const auth = require("../middlewares/auth")
 const adminAuth = require("../middlewares/adminAuth")
+const cloudinary = require("../utils/cloudinary")
+const upload = require("../utils/multer")
 
 router.get("/news", async(req, res) => {
     try{
@@ -23,9 +25,15 @@ router.get("/news/:id", async(req, res) => {
     }
 })
 
-router.post("/news",[auth, adminAuth], async(req, res) => {
-    const news = new News(req.body)
+router.post("/news",[auth, adminAuth], upload.single("image"), async(req, res) => {
     try{
+        const result = await cloudinary.uploader.upload(req.file.path)
+
+        const news = new News({
+            ...req.body,
+            image: result.secure_url,
+            cloudinary_id: result.public_id,
+        })
         await news.save()
         res.send(news)
     }catch(error) {
@@ -33,7 +41,7 @@ router.post("/news",[auth, adminAuth], async(req, res) => {
     }
 })
 
-router.put("/news/:id", [auth, adminAuth], async(req, res) => {
+router.put("/news/:id", [auth, adminAuth], upload.single("image"),  async(req, res) => {
     const {id} = req.params
     const updateList = Object.keys(req.body)
     const allowUpdate = ["title", "subtitle"]
@@ -41,8 +49,22 @@ router.put("/news/:id", [auth, adminAuth], async(req, res) => {
     const isValidOperation = updateList.every((update) => allowUpdate.includes(update))
     if(!isValidOperation) return res.status(400).send("Invalid updates!")
     try{
-        const news = await News.findById(id)
-        updateList.forEach(update => news[update] = req.body[update])
+        let news = await News.findById(id)
+        await cloudinary.uploader.destroy(news.cloudinary_id)
+
+        let result;
+        if (req.file) {
+        result = await cloudinary.uploader.upload(req.file.path)
+        }
+
+        const changedNews = {
+            title: req.body.title || news.title,
+            subtitle: req.body.subtitle || news.subtitle,
+            image: result?.secure_url || news.image,
+            cloudinary_id: result?.public_id || news.cloudinary_id,
+        }
+        news = await News.findByIdAndUpdate(req.params.id, changedNews, { new: true })
+
         await news.save()
         res.send(news)
     }catch(error) {
@@ -53,7 +75,9 @@ router.put("/news/:id", [auth, adminAuth], async(req, res) => {
 router.delete("/news/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     try{ 
-        const news = await News.findByIdAndRemove(id)
+        const news = await News.findById(id)
+        await cloudinary.uploader.destroy(news.cloudinary_id)
+        await news.remove()
         res.send("Delete news")
     }catch(error) {
         res.status(400).send(error.message)
