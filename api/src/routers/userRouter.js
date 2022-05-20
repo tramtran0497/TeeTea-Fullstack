@@ -11,7 +11,7 @@ const informDeleteAccount = require("../email/InformDeleteAccount")
 const upload = multer({
     // Image can not over 1MB
     limits: {
-        fileSize: 1000000
+        fileSize: 2000000
     },
     fileFilter(req, file, cb) {
         if(!file.originalname.match(/\.(jpg|png|jpeg)$/)) {
@@ -47,6 +47,22 @@ router.get("/user/:id/avatar", async(req, res) => {
         res.status(404).send({error: error.message});
     }
 }) 
+
+router.put("/user/username/avatar", auth, upload.single("avatar"), async(req, res) => {
+    try{
+        // find an user
+        const user = await User.findById(req.user._id)
+        // delete the old avatar
+        user.avatar = undefined
+        // update the new one
+        const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
+        user.avatar = buffer 
+        await user.save()
+        res.send(user)
+    } catch(error) {
+        res.status(400).send({error: error.message})
+    }
+})
 
 router.delete("/user/username/avatar", auth, async(req, res) => {
     try{

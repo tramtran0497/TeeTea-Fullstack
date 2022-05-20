@@ -79,6 +79,9 @@ test("Delete an account", async() => {
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .send()
             .expect(200)
+
+    const user = await User.findById(userOneId)
+    expect(user).toBeNull()
 })
 
 test("Delete an account without authorized", async() => {
@@ -86,4 +89,44 @@ test("Delete an account without authorized", async() => {
             .delete("/user/username")
             .send()
             .expect(401)
+})
+
+test("Upload avatar", async() => {
+    await request(app)
+            .post("/user/username/avatar")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .attach("avatar", "test/fixtures/IMG_3071.jpg")
+            .expect(200)
+    const user = await User.findById(userOneId)
+    expect(user.avatar).toEqual(expect.any(Buffer))
+})
+
+test("Upload large size avatar", async() => {
+    await request(app)
+            .post("/user/username/avatar")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .attach("avatar", "test/fixtures/CV-Photo.jpg")
+            .expect(400)
+})
+
+test("Update profile user", async() => {
+    await request(app)
+            .put("/user/username")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .send({
+                name: "Brian"
+            })
+            .expect(200)
+    const user = await User.findById(userOneId)
+    expect(user.name).toEqual("Brian")
+})
+
+test("Update invalid user fields", async() => {
+    await request(app)
+            .put("/user/username")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .send({
+                age: 23
+            })
+            .expect(400)
 })
