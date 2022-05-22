@@ -6,12 +6,13 @@ const sendWelcomeNewbie = require("../email/welcomeNewbie")
 const multer = require('multer')
 const sharp = require("sharp")
 const informDeleteAccount = require("../email/InformDeleteAccount")
+const adminAuth = require("../middlewares/adminAuth")
 
 // Setup upload images
 const upload = multer({
     // Image can not over 1MB
     limits: {
-        fileSize: 2000000
+        fileSize: 1500000
     },
     fileFilter(req, file, cb) {
         if(!file.originalname.match(/\.(jpg|png|jpeg)$/)) {
@@ -75,7 +76,7 @@ router.delete("/user/username/avatar", auth, async(req, res) => {
 })
 
 // I did not place auth and adminAuth yet!! 
-router.get("/users", async(req, res) => {
+router.get("/users", [auth, adminAuth],async(req, res) => {
     try{
         const users = await User.find({})
         res.send(users)

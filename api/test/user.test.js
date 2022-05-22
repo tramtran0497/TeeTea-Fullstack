@@ -19,10 +19,28 @@ const userOne = {
     ]
 }
 
+const adminId = new mongoose.Types.ObjectId()
+const admin = {
+    _id: adminId,
+    name: "Tram Admin",
+    email: "tram.admin@gmail.com",
+    phoneNumber: "0413789459",
+    address: "Mariankatu 6B",
+    password: "tramadmin",
+    DOB: "12/12/1982",
+    isAdmin: true,
+    tokens: [
+        jwt.sign({ id: adminId, isAdmin: this.isAdmin}, process.env.SECRET, {expiresIn: "3 days"})
+    ]
+}
+
 beforeEach( async() => {
     await User.deleteMany()
     await new User(userOne).save()
+    await new User(admin).save()
 })
+
+// User's permission
 
 test("Sign up an account user", async() => {
     await request(app)
@@ -58,6 +76,23 @@ test("Login nonexistent account", async() => {
             .expect(400)
 })
 
+test("Logout", async() => {
+    await request(app)
+            .post("/logout")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .send()
+            .expect(200)
+    const user = await User.findById(userOneId)
+    expect(user.tokens).toEqual([])
+})
+
+test("Logout without authorized", async() => {
+    await request(app)
+            .post("/logout")
+            .send()
+            .expect(401)
+})
+
 test("Get information profile", async() => {
     await request(app)
             .get("/user/username")
@@ -71,42 +106,6 @@ test("Get information profile without authorized", async() => {
             .get("/user/username")
             .send()
             .expect(401)
-})
-
-test("Delete an account", async() => {
-    await request(app)
-            .delete("/user/username")
-            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
-            .send()
-            .expect(200)
-
-    const user = await User.findById(userOneId)
-    expect(user).toBeNull()
-})
-
-test("Delete an account without authorized", async() => {
-    await request(app)
-            .delete("/user/username")
-            .send()
-            .expect(401)
-})
-
-test("Upload avatar", async() => {
-    await request(app)
-            .post("/user/username/avatar")
-            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
-            .attach("avatar", "test/fixtures/IMG_3071.jpg")
-            .expect(200)
-    const user = await User.findById(userOneId)
-    expect(user.avatar).toEqual(expect.any(Buffer))
-})
-
-test("Upload large size avatar", async() => {
-    await request(app)
-            .post("/user/username/avatar")
-            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
-            .attach("avatar", "test/fixtures/CV-Photo.jpg")
-            .expect(400)
 })
 
 test("Update profile user", async() => {
@@ -130,3 +129,101 @@ test("Update invalid user fields", async() => {
             })
             .expect(400)
 })
+
+test("Delete an account", async() => {
+    await request(app)
+            .delete("/user/username")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .send()
+            .expect(200)
+
+    const user = await User.findById(userOneId)
+    expect(user).toBeNull()
+})
+
+test("Delete an account without authorized", async() => {
+    await request(app)
+            .delete("/user/username")
+            .send()
+            .expect(401)
+})
+
+// Avatar
+
+test("Upload avatar", async() => {
+    await request(app)
+            .post("/user/username/avatar")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .attach("avatar", "test/fixtures/upload.jpg")
+            .expect(200)
+    const user = await User.findById(userOneId)
+    expect(user.avatar).toEqual(expect.any(Buffer))
+    // Get avatar
+    await request(app)
+            .get(`/user/${userOneId}/avatar`)
+            .send()
+            .expect(200)
+})
+
+test("Upload large size avatar", async() => {
+    await request(app)
+            .post("/user/username/avatar")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .attach("avatar", "test/fixtures/largeSize.jpg")
+            .expect(400)
+})
+
+test("Update user's avatar", async() => {
+    await request(app)
+            .put("/user/username/avatar")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .attach("avatar", "test/fixtures/updatePic.jpg")
+            .expect(200)
+})
+
+test("Update user's avatar without authorized", async() => {
+    await request(app)
+            .put("/user/username/avatar")
+            .attach("avatar", "test/fixtures/updatePic.jpg")
+            .expect(401)
+})
+
+test("Delete user's avatar", async() => {
+    await request(app)
+            .delete("/user/username/avatar")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .send()
+            .expect(200)
+})
+
+test("Delete user's avatar without authorized", async() => {
+    await request(app)
+            .delete("/user/username/avatar")
+            .send()
+            .expect(401)
+})
+
+// Admin's permission: read all users information
+test("Read all users information without admin's permission", async() => {
+    await request(app)
+            .get("/users")
+            .set("Authorization", `Bearer ${userOne.tokens[0]}`)
+            .send()
+            .expect(403)
+})
+
+test("Admin reads all users information", async() => {
+    const admin = await User.findById(adminId)
+    expect(admin.isAdmin).toBe(true)
+
+    await request(app)
+            .get("/users")
+            .set("Authorization", `Bearer ${admin.tokens[0]}`)
+            .expect(200)
+})
+
+
+
+
+
+ 
