@@ -1,47 +1,11 @@
 const request = require("supertest")
 const app = require("../src/app")
-const jwt = require("jsonwebtoken")
-const mongoose = require("mongoose")
 const User = require("../src/models/User")
+const {userOne, userOneId, admin, adminId, setUpDB} = require("./fixtures/userDb")
 
-// create a specific user for testing
-const userOneId = new mongoose.Types.ObjectId()
-const userOne = {
-    _id: userOneId,
-    name: "Tram Sample",
-    email: "tram.sample@gmail.com",
-    phoneNumber: "0413789450",
-    address: "Mariankatu 6B",
-    password: "tramsample",
-    DOB: "12/12/1992",
-    tokens: [
-        jwt.sign({ id: userOneId, isAdmin: this.isAdmin}, process.env.SECRET, {expiresIn: "3 days"})
-    ]
-}
-
-const adminId = new mongoose.Types.ObjectId()
-const admin = {
-    _id: adminId,
-    name: "Tram Admin",
-    email: "tram.admin@gmail.com",
-    phoneNumber: "0413789459",
-    address: "Mariankatu 6B",
-    password: "tramadmin",
-    DOB: "12/12/1982",
-    isAdmin: true,
-    tokens: [
-        jwt.sign({ id: adminId, isAdmin: this.isAdmin}, process.env.SECRET, {expiresIn: "3 days"})
-    ]
-}
-
-beforeEach( async() => {
-    await User.deleteMany()
-    await new User(userOne).save()
-    await new User(admin).save()
-})
+beforeEach(setUpDB)
 
 // User's permission
-
 test("Sign up an account user", async() => {
     await request(app)
             .post("/users")
@@ -149,7 +113,6 @@ test("Delete an account without authorized", async() => {
 })
 
 // Avatar
-
 test("Upload avatar", async() => {
     await request(app)
             .post("/user/username/avatar")
@@ -221,9 +184,3 @@ test("Admin reads all users information", async() => {
             .set("Authorization", `Bearer ${admin.tokens[0]}`)
             .expect(200)
 })
-
-
-
-
-
- 
