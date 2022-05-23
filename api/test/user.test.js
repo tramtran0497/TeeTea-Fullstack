@@ -167,7 +167,10 @@ test("Delete user's avatar without authorized", async() => {
 })
 
 // Admin's permission: read all users information
-test("Read all users information without admin's permission", async() => {
+test("Read all users information with user account", async() => {
+    const userOne = await User.findById(userOneId)
+    expect(userOne.isAdmin).toEqual(undefined)
+
     await request(app)
             .get("/users")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
@@ -175,7 +178,7 @@ test("Read all users information without admin's permission", async() => {
             .expect(403)
 })
 
-test("Admin reads all users information", async() => {
+test("Reads all users information with admin account", async() => {
     const admin = await User.findById(adminId)
     expect(admin.isAdmin).toBe(true)
 

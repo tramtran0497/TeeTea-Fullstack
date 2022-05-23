@@ -98,7 +98,8 @@ router.post("/users", async(req, res) => {
     const user = new User(req.body)
     try{
         await user.save()
-        sendWelcomeNewbie(user.email, user.name)
+        // I used over limit usage of SendGrid
+        // sendWelcomeNewbie(user.email, user.name)
         
         res.send(user)
     }catch(error) {
@@ -147,7 +148,7 @@ router.put("/user/username", auth, async(req, res) => {
 router.delete("/user/username", auth, async(req, res) => {
     try{ 
         await User.findByIdAndDelete(req.user._id)
-        informDeleteAccount(req.user.email, req.user.name)
+        // informDeleteAccount(req.user.email, req.user.name)
         res.send("Successful deleted!")
     }catch(error) {
         res.status(400).send({error: error.message})

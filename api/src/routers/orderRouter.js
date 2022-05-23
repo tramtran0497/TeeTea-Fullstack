@@ -32,7 +32,7 @@ router.post("/user/orders", auth, async(req, res) => {
             owner: req.user._id,
         })
         await order.save()
-        confirmNewOrder(order.orderId, req.user.name)
+        // confirmNewOrder(order.orderId, req.user.name)
         res.send(order)
     }catch(error) {
         res.status(400).send({error: error.message})

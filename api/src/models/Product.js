@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true,
+        // required: true,
     },
     cloudinary_id: {
         type: String,

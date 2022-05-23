@@ -52,8 +52,9 @@ router.put("/product/:id", [auth, adminAuth], upload.single("image"), async(req,
     try{
         let product = await Product.findById(id)
         // delete the previous image in cloudinary
-        await cloudinary.uploader.destroy(product.cloudinary_id)
-
+        if(product.cloudinary_id){
+            await cloudinary.uploader.destroy(product.cloudinary_id)
+        }
         let result;
         if (req.file) {
           result = await cloudinary.uploader.upload(req.file.path)
@@ -84,7 +85,9 @@ router.delete("/product/:id", [auth, adminAuth], async(req, res) => {
     try{ 
         const product = await Product.findById(id)
         // Delete image from cloudinary
-        await cloudinary.uploader.destroy(product.cloudinary_id)
+        if(product.cloudinary_id){
+            await cloudinary.uploader.destroy(product.cloudinary_id)
+        }
         // Delete user from db
         await product.remove()
         res.send("Delete a product")
