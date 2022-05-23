@@ -98,8 +98,7 @@ router.post("/users", async(req, res) => {
     const user = new User(req.body)
     try{
         await user.save()
-        // I used over limit usage of SendGrid
-        // sendWelcomeNewbie(user.email, user.name)
+        sendWelcomeNewbie(user.email, user.name)
         
         res.send(user)
     }catch(error) {

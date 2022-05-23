@@ -1,5 +1,6 @@
 const request = require("supertest")
 const app = require("../src/app")
+const supertest = request(app)
 const User = require("../src/models/User")
 const {userOne, userOneId, admin, adminId, setUpDB} = require("./fixtures/userDb")
 
@@ -7,7 +8,7 @@ beforeEach(setUpDB)
 
 // User's permission
 test("Sign up an account user", async() => {
-    await request(app)
+    await supertest
             .post("/users")
             .send({
                 name: "Tram Test",
@@ -21,7 +22,7 @@ test("Sign up an account user", async() => {
 })
 
 test("Login an existed user", async() => {
-    await request(app)
+    await supertest
             .post("/login")
             .send({
                 email: userOne.email,
@@ -31,7 +32,7 @@ test("Login an existed user", async() => {
 })
 
 test("Login nonexistent account", async() => {
-    await request(app)
+    await supertest
             .post("/login")
             .send({
                 email: userOne.email,
@@ -41,7 +42,7 @@ test("Login nonexistent account", async() => {
 })
 
 test("Logout", async() => {
-    await request(app)
+    await supertest
             .post("/logout")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .send()
@@ -51,14 +52,14 @@ test("Logout", async() => {
 })
 
 test("Logout without authorized", async() => {
-    await request(app)
+    await supertest
             .post("/logout")
             .send()
             .expect(401)
 })
 
 test("Get information profile", async() => {
-    await request(app)
+    await supertest
             .get("/user/username")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .send()
@@ -66,14 +67,14 @@ test("Get information profile", async() => {
 })
 
 test("Get information profile without authorized", async() => {
-    await request(app)
+    await supertest
             .get("/user/username")
             .send()
             .expect(401)
 })
 
 test("Update profile user", async() => {
-    await request(app)
+    await supertest
             .put("/user/username")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .send({
@@ -85,7 +86,7 @@ test("Update profile user", async() => {
 })
 
 test("Update invalid user fields", async() => {
-    await request(app)
+    await supertest
             .put("/user/username")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .send({
@@ -95,7 +96,7 @@ test("Update invalid user fields", async() => {
 })
 
 test("Delete an account", async() => {
-    await request(app)
+    await supertest
             .delete("/user/username")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .send()
@@ -106,7 +107,7 @@ test("Delete an account", async() => {
 })
 
 test("Delete an account without authorized", async() => {
-    await request(app)
+    await supertest
             .delete("/user/username")
             .send()
             .expect(401)
@@ -114,7 +115,7 @@ test("Delete an account without authorized", async() => {
 
 // Avatar
 test("Upload avatar", async() => {
-    await request(app)
+    await supertest
             .post("/user/username/avatar")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .attach("avatar", "test/fixtures/upload.jpg")
@@ -122,14 +123,14 @@ test("Upload avatar", async() => {
     const user = await User.findById(userOneId)
     expect(user.avatar).toEqual(expect.any(Buffer))
     // Get avatar
-    await request(app)
+    await supertest
             .get(`/user/${userOneId}/avatar`)
             .send()
             .expect(200)
 })
 
 test("Upload large size avatar", async() => {
-    await request(app)
+    await supertest
             .post("/user/username/avatar")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .attach("avatar", "test/fixtures/largeSize.jpg")
@@ -137,7 +138,7 @@ test("Upload large size avatar", async() => {
 })
 
 test("Update user's avatar", async() => {
-    await request(app)
+    await supertest
             .put("/user/username/avatar")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .attach("avatar", "test/fixtures/updatePic.jpg")
@@ -145,14 +146,14 @@ test("Update user's avatar", async() => {
 })
 
 test("Update user's avatar without authorized", async() => {
-    await request(app)
+    await supertest
             .put("/user/username/avatar")
             .attach("avatar", "test/fixtures/updatePic.jpg")
             .expect(401)
 })
 
 test("Delete user's avatar", async() => {
-    await request(app)
+    await supertest
             .delete("/user/username/avatar")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .send()
@@ -160,7 +161,7 @@ test("Delete user's avatar", async() => {
 })
 
 test("Delete user's avatar without authorized", async() => {
-    await request(app)
+    await supertest
             .delete("/user/username/avatar")
             .send()
             .expect(401)
@@ -171,7 +172,7 @@ test("Read all users information with user account", async() => {
     const userOne = await User.findById(userOneId)
     expect(userOne.isAdmin).toEqual(undefined)
 
-    await request(app)
+    await supertest
             .get("/users")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)
             .send()
@@ -182,7 +183,7 @@ test("Reads all users information with admin account", async() => {
     const admin = await User.findById(adminId)
     expect(admin.isAdmin).toBe(true)
 
-    await request(app)
+    await supertest
             .get("/users")
             .set("Authorization", `Bearer ${admin.tokens[0]}`)
             .expect(200)
