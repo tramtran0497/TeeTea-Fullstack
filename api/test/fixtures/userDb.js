@@ -1,17 +1,18 @@
-const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken")
 const User = require("../../src/models/User")
 
 // create a specific user for testing
 const userOneId = new mongoose.Types.ObjectId()
 const userOne = {
     _id: userOneId,
-    name: "Tram Sample",
-    email: "tram.sample@gmail.com",
-    phoneNumber: "0413789450",
+    name: "Tram User",
+    email: "tram.user@gmail.com",
+    phoneNumber: "0413789460",
     address: "Mariankatu 6B",
-    password: "tramsample",
+    password: "tramuser",
     DOB: "12/12/1992",
+    isAdmin: false,
     tokens: [
         jwt.sign({ id: userOneId, isAdmin: this.isAdmin}, process.env.SECRET, {expiresIn: "3 days"})
     ]
@@ -20,11 +21,11 @@ const userOne = {
 const adminId = new mongoose.Types.ObjectId()
 const admin = {
     _id: adminId,
-    name: "Tram Admin",
-    email: "tram.admin@gmail.com",
-    phoneNumber: "0413789459",
+    name: "Tram Admin User",
+    email: "tram.adminuser@gmail.com",
+    phoneNumber: "0413734682",
     address: "Mariankatu 6B",
-    password: "tramadmin",
+    password: "tramadminuser",
     DOB: "12/12/1982",
     isAdmin: true,
     tokens: [
@@ -41,7 +42,7 @@ const setUpDB = async() => {
 module.exports = {
     userOne,
     userOneId,
-    admin,
+    admin, 
     adminId,
     setUpDB
 }

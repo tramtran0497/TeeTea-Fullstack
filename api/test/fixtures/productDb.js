@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
-const Product = require("../../src/models/Product")
 const jwt = require("jsonwebtoken")
+const Product = require("../../src/models/Product")
 const User = require("../../src/models/User")
 
 // create an admin for testing
@@ -19,21 +19,6 @@ const admin = {
     ]
 }
 
-// create a specific user for testing
-const userId = new mongoose.Types.ObjectId()
-const user = {
-    _id: userId,
-    name: "Tram user",
-    email: "tram.user@gmail.com",
-    phoneNumber: "0413789460",
-    address: "Mariankatu 6B",
-    password: "tramuser",
-    DOB: "12/12/1292",
-    tokens: [
-        jwt.sign({ id: userId, isAdmin: this.isAdmin}, process.env.SECRET, {expiresIn: "3 days"})
-    ]
-}
-
 const productId = new mongoose.Types.ObjectId()
 const product = {
     _id: productId,
@@ -48,7 +33,6 @@ const product = {
 const setUpDBProduct = async() => {
     await User.deleteMany()
     await new User(admin).save() 
-    await new User(user).save() 
     await Product.deleteMany()
     await new Product(product).save()
 }
@@ -56,9 +40,7 @@ const setUpDBProduct = async() => {
 module.exports = {
     product,
     productId,
-    admin,
+    admin, 
     adminId,
-    user,
-    userId,
     setUpDBProduct
 }

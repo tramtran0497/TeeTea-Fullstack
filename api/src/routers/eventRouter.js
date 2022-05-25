@@ -51,7 +51,9 @@ router.put("/event/:id", [auth, adminAuth], upload.single("image"), async(req, r
     try{
         let event = await Event.findById(id)
         // delete the previous image in cloudinary
-        await cloudinary.uploader.destroy(event.cloudinary_id)
+        if(event.cloudinary_id) {
+            await cloudinary.uploader.destroy(event.cloudinary_id)
+        }
 
         let result;
         if (req.file) {
@@ -77,8 +79,10 @@ router.delete("/event/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     try{ 
         const event = await Event.findById(id)
-         // Delete image from cloudinary
-        await cloudinary.uploader.destroy(event.cloudinary_id)
+        // delete the previous image in cloudinary
+        if(event.cloudinary_id) {
+            await cloudinary.uploader.destroy(event.cloudinary_id)
+        }
         // Delete user from db
         await event.remove()
         res.send("Delete an event")
