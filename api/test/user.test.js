@@ -21,6 +21,7 @@ beforeEach(setUpDB)
     })
 
     test(`should return status code 200 when login correct account`, async() => {
+        // console.log("Login", userOne.email, userOne.password)
         await supertest
             .post("/login")
             .send({
@@ -41,6 +42,7 @@ beforeEach(setUpDB)
     })
 
     test(`should return status code 200 and return empty array tokens when logout`, async() => {
+        // console.log("Logout", userOne.tokens[0])
         await supertest
             .post("/logout")
             .set("Authorization", `Bearer ${userOne.tokens[0]}`)

@@ -50,8 +50,9 @@ router.put("/news/:id", [auth, adminAuth], upload.single("image"),  async(req, r
     if(!isValidOperation) return res.status(400).send("Invalid updates!")
     try{
         let news = await News.findById(id)
-        await cloudinary.uploader.destroy(news.cloudinary_id)
-
+        if(news.cloudinary_id){
+            await cloudinary.uploader.destroy(news.cloudinary_id)
+        }
         let result;
         if (req.file) {
         result = await cloudinary.uploader.upload(req.file.path)
@@ -76,7 +77,9 @@ router.delete("/news/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     try{ 
         const news = await News.findById(id)
-        await cloudinary.uploader.destroy(news.cloudinary_id)
+        if(news.cloudinary_id){
+            await cloudinary.uploader.destroy(news.cloudinary_id)
+        }
         await news.remove()
         res.send("Delete news")
     }catch(error) {

@@ -50,8 +50,10 @@ router.put("/job/:id", [auth, adminAuth], upload.single("image"), async(req, res
     if(!isValidOperation) return res.status(400).send("Invalid updates!")
     try{
         let job = await Job.findById(id)
-        // delete the previous image in cloudinary
-        await cloudinary.uploader.destroy(job.cloudinary_id)
+          // delete the previous image in cloudinary
+          if(job.cloudinary_id) {
+            await cloudinary.uploader.destroy(job.cloudinary_id)
+        }
 
         let result;
         if (req.file) {
@@ -77,8 +79,10 @@ router.delete("/job/:id", [auth, adminAuth], async(req, res) => {
     const {id} = req.params
     try{ 
         const job = await Job.findById(id)
-        await cloudinary.uploader.destroy(job.cloudinary_id)
-        await job.remove()
+        // delete the previous image in cloudinary
+        if(job.cloudinary_id) {
+            await cloudinary.uploader.destroy(job.cloudinary_id)
+}        await job.remove()
         res.send("Delete a job ")
     }catch(error) {
         res.status(400).send(error.message)
