@@ -1,69 +1,76 @@
-import styles from "../../styles/Product.module.css";
-import Image from "next/image";
-import { BsCupStraw } from "react-icons/bs";
-import Head from "next/head";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import {listProducts} from "../../fakeData/MenuData.js";
+import styles from "../../styles/Product.module.css"
+import Image from "next/image"
+import { BsCupStraw } from "react-icons/bs"
+import Head from "next/head"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import {listProducts} from "../../fakeData/MenuData.js"
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../Redux/Cart/action"
 
 export default function Product () {
-    const router = useRouter();
+    const router = useRouter()
+    const dispatch = useDispatch();
     const [item, setItem] = useState(null)
-    const [sizePrice, setSizePrice] = useState("none")
+    const [priceItem, setPriceItem] = useState(0)
     const [extraList, setExtraList] = useState([])
-    const [orderedItem, setOrderedItem] = useState({
-        name: "",
-        size: "",
-        extra: [],
-        note: "",
-        quantity: 0
-    })
-    useEffect(() => {
-        const {id} = router.query;
 
+    const {listCarts} = useSelector(state => state.cart);
+
+    useEffect(() => {
+        const {id} = router.query
         if(listProducts.length > 0 && id) {
           const product = listProducts.find(item => item.id === id)
-          product ? setItem(product) : setItem(null)          
+          product ? setItem(product) : setItem(null) 
+          setPriceItem(product.price[0])         
         }
-    }, [listProducts]);
+    }, [listProducts])
 
     const handleSubmit = (event) => {
         event.preventDefault()
         const data = new FormData(event.target)
-        const {size, note, quantity} = Object.fromEntries(data.entries())
-        setOrderedItem(prevState => ({
-            ...prevState,
+        const formObj = Object.fromEntries(data.entries())
+        const size = formObj.size
+        const note = formObj.note
+        const qty = parseInt(formObj.quantity)
+        const creatingItem = {
+            id: item.id,
             name: item.name,
+            img: item.img,
+            price: priceItem,
             size,
             note,
-            quantity
-        }));
+            qty,
+            listAddIngredient: extraList
+        }
+        // dispatch
+        dispatch(addToCart(creatingItem))
+         // 👇️ clear all input values in the form
+        event.target.reset();
     }
 
     const handleSelect = (event) => {
         event.preventDefault()
-        setSizePrice(event.target.value)
+        if(event.target.value === "none" || event.target.value === "Small"){
+            setPriceItem(item.price[0])
+        } else if(event.target.value === "Medium"){
+            setPriceItem(item.price[1])
+        } else{
+            setPriceItem(item.price[2])
+        }
     }
 
     const handleCheck = (event) => {
         const itemName = event.target.name
         if(event.target.checked){
-            setExtraList(oldArray => [...oldArray, itemName])
+            setExtraList(pre => [...pre, itemName])
         } else{
             const removeItem = extraList.find(item => item === itemName)
             setExtraList(extraList.filter(item => item !== removeItem))
         }
     }
 
-    useEffect(() => {
-        const extra = extraList
-        setOrderedItem({
-            ...orderedItem,
-            extra
-        })
-    }, [item, extraList])
-
-    useEffect(()=> console.log("Order",orderedItem))
+    // useEffect(() => console.log("Cart item",orderedItem))
 
     if(!item) {
         // ToDo: create PAGE404 component
@@ -84,10 +91,7 @@ export default function Product () {
                 </div>
                 <div className={styles.info}>
                     <h2>{item.name}</h2>
-                    <h2>€ {
-                        (sizePrice === "none" || sizePrice === "Small") ? item.price[0] : sizePrice === "Medium" ? item.price[1] : item.price[2]
-                    }
-                    </h2>
+                    {priceItem ? <h2>€ {priceItem}</h2> : ""}
                     <form action="" onSubmit={handleSubmit}>
                         <label className={styles.title} htmlFor="size">Choose your favor size (only Drinks <BsCupStraw style={{"fontSize": "30px"}}/>) :</label>
                         <select name="size" id="size" className={styles.size} onChange={handleSelect}>
@@ -106,6 +110,7 @@ export default function Product () {
                                 </div>
                             ))
                         }
+                        <div>You want to add more: {extraList?.map(extraItem => <span> {extraItem},</span>)}</div>
                         <label className={styles.title} htmlFor="note">Unique taste! Leave your note here!</label>
                         <input type="text" placeholder="E.g: Allergic to sesame" className={styles.note} id="note" name="note"/>
 
@@ -117,6 +122,6 @@ export default function Product () {
                     </form>
                 </div>
             </div>
-        );
+        )
     }
-};
+}

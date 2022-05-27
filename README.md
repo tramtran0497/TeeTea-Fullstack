@@ -26,7 +26,7 @@ Current:
 3. Fetching data method get all products/ news/ events/ jobs from API. 
 4. Setup saving list cart, theme at local storage. 
 5. Redesign `Sign up` page.
-6. Adding backgroung image when have no items in cart on `Cart` page.
+6. Adding background image when have no items in cart on `Cart` page.
 7. when clicking each 3 buttons status order, it's background colo is black and showing the status order on side.
 8. Hiding/ disappearance User sidebar when clicking others.
 9. At each product page, using redux to add cart after fill a form order each product.
