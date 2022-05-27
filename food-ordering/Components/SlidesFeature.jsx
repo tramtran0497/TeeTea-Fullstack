@@ -5,16 +5,18 @@ import { useState } from "react";
 import {listSlides} from "../fakeData/SlidesData.js"
 
 export const SlidesFeature = () => {
-    const lastIndexSlide = listSlides.length - 1;
     const [index, setIndex] = useState(0);
 
     const handleSlides = (direction) => {
+        const lastIndexSlide = listSlides.length - 1;
+
         if(direction === "left"){
             setIndex(index !== 0 ? index - 1 : lastIndexSlide);
         } else{
             setIndex(index !== lastIndexSlide ? index + 1 : 0);
         }
     };
+
   return (
     <div className={styles.container}>
         <BiChevronsLeft className={styles.icon} style={{"left": "20px"}} onClick={() => handleSlides("left")}/>
