@@ -8,10 +8,10 @@ import { GiHotMeal } from "react-icons/gi";
 
 export default function cart(){
   const {listCarts} = useSelector(state => state.cart);
-  const initialValue = 0;
-  const totalAmountBill = listCarts.map(cart => cart.qty * cart.price[0]).reduce((pre, cur) => pre + cur, 0);
+  const totalAmountBill = listCarts.map(cart => cart.qty * cart.price).reduce((pre, cur) => pre + cur, 0);
 
   useEffect(() => {
+    
   });
   
   return (
@@ -43,7 +43,7 @@ export default function cart(){
                 <div className={styles.infoWrapper}>
                     <h4>Size:</h4>
                     { /* hard code */}
-                    <p>{cart.size[0]}</p>
+                    <p>{cart.size}</p>
                 </div>
                 <div className={styles.infoWrapper}>
                     <h4>Quantity:</h4>
@@ -52,7 +52,7 @@ export default function cart(){
                 <div className={styles.infoWrapper}>
                     <h4>Price:</h4>
                     { /* hard code */}
-                    <p>€ {cart.price[0]}</p>
+                    <p>€ {cart.price}</p>
                 </div>
                 <FaTrashAlt className={styles.trashIcon}/>
               </div>
@@ -73,7 +73,7 @@ export default function cart(){
                   <div className={styles.item}>
                     <h4>{cart.name} - {cart.id}</h4>
                     <p>{cart.qty}</p>
-                    <p>{cart.qty * cart.price[0]}</p>
+                    <p>{cart.qty * cart.price}</p>
                   </div>
                 ))
               }
