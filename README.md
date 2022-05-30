@@ -39,3 +39,10 @@ Current:
 5. Fetching all orders to show history order.
 6. Creating sending email to change password when customer forgets their password.
 7. 
+
+# Deploy API to Heroku
+
+We cannot deploy the entire repo, we need to use the subtree to push to heroku repo. Article: https://janessagarrow.com/blog/how-to-deploy-a-subdirectory-to-heroku/
+``` bash
+git subtree push --prefix api heroku master
+```
