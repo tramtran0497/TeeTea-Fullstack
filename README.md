@@ -46,3 +46,9 @@ We cannot deploy the entire repo, we need to use the subtree to push to heroku r
 ``` bash
 git subtree push --prefix api heroku master
 ```
+
+Public fetch data:
+- Read information of all products/ specific product
+- Read information of all events/ specific event
+- Read information of all news/ specific news
+- Read information of all jobs/ specific job
