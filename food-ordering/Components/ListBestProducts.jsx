@@ -1,8 +1,28 @@
-import styles from "../styles/ListBestProducts.module.css";
-import {listProducts} from "../fakeData/MenuData.js";
-import { BestProduct } from "./BestProduct";
+import styles from "../styles/ListBestProducts.module.css"
+import {listProducts} from "../fakeData/MenuData.js"
+import { BestProduct } from "./BestProduct"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 export const ListBestProducts = () => {
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const url ="https://teetea-api.herokuapp.com/products"
+            try {
+              const { data: response } = await axios.get(url)
+              console.log("AAAAA",response)
+              setData(response)
+            } catch (error) {
+              console.error("EEEE",error);
+            }
+            setLoading(false)
+          }
+      
+          fetchData()
+        }, [])
   return (
     <div className={styles.container}>
         <div className={styles.title}>
