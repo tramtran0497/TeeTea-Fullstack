@@ -9,6 +9,10 @@ const userRouter = require("./routers/userRouter")
 
 const app = express()
 // Middleware
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    next()
+})
 app.use(express.json())
 
 app.use(productRouter)
