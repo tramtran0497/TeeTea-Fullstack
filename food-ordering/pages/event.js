@@ -14,7 +14,7 @@ export default function Event() {
 
             <h1>NEWS</h1>
             <div className={styles.eventCards}>
-                {eventList.map(event => <EventCard event={event}/>)}
+                {eventList.map((event, index) => <EventCard event={event} key={index}/>)}
             </div>
         </div>
     )

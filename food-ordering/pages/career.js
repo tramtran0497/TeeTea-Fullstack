@@ -14,7 +14,7 @@ export default function contact () {
             <div className={styles.wrapper}>
                 <h1>WE ARE HIRING...</h1>
                 <div className={styles.cards}>
-                    {recruitList.map(position => <JobCard position={position}/>)}
+                    {recruitList.map((position, index) => <JobCard position={position} key={index}/>)}
                 </div>
             </div>
             <div className={styles.formApplyJob}>

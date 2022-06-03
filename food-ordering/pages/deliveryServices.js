@@ -19,7 +19,7 @@ export default function deliveryServices(){
               <div className={styles.serviceContent}>
                 <p>There are two options delivery services:</p>
                 <h5>TeeTea Service: </h5>
-                <p> - You click "Delivery" button status when ordering!</p>
+                <p> - You click &quot;Delivery&quot; button status when ordering!</p>
                 <p> - Only using local area (about 10km) with 20 minutes each order.</p>
                 <p> - Free FIRST 3 TIMES!!! (with new account).</p>
                 <p> - Cost: (the price of each delivery depends on your location).</p>
@@ -32,8 +32,8 @@ export default function deliveryServices(){
               <h4>Delivery Gifts for friends and family</h4>
               <div className={styles.serviceContent}>
               <p>The specialist service at TeeTea Restaurant!</p>
-                <p>Let's us help you to bring all the best to your friends and your family!</p>
-                <p> - You click "Gifts for Friends and Family" button status when ordering!</p>
+                <p>Let&rsquo;s us help you to bring all the best to your friends and your family!</p>
+                <p> - You click &quot;Gifts for Friends and Family&quot; button status when ordering!</p>
                 <p> - Only using local area (about 10km) with 20 minutes each order.</p>
                 <p> - Cost: (the price of each delivery depends on your location).</p>
                 <p> - Free FIRST TIME!!! (with new account).</p>
@@ -60,8 +60,8 @@ export default function deliveryServices(){
               <h4>Delivery Monthly</h4>
               <div className={styles.serviceContent}>
               <h5>How about Delivery Monthly?</h5>
-              <p>If "Delivery Times" is not enough! why don't you choose this service? Saving more money with delivery monthly, weekly, daily. </p>
-              <h5>Montly Service:</h5>
+              <p>If &quot;Delivery Times&quot; is not enough! why do not you choose this service? Saving more money with delivery monthly, weekly, daily. </p>
+              <h5>Monthly Service:</h5>
                 <p> - Saving money 40% compared to normal delivery.</p>
                 <p> - Cost: (the price of each delivery depends on your location).</p>
                 <p> - Note: The same address point each option!</p>

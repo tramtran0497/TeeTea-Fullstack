@@ -3,16 +3,11 @@ import Image from "next/image";
 import { FaTrashAlt } from "react-icons/fa";
 import { ChangeQty } from "../Components/ChangeQty";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import { GiHotMeal } from "react-icons/gi";
 
-export default function cart(){
+export default function Carts(){
   const {listCarts} = useSelector(state => state.cart);
   const totalAmountBill = listCarts.map(cart => cart.qty * cart.price).reduce((pre, cur) => pre + cur, 0);
-
-  useEffect(() => {
-    
-  });
   
   return (
     <div className={styles.container}>
@@ -20,7 +15,7 @@ export default function cart(){
       <div className={styles.listOrderedItems}>
         {
           listCarts.length ? listCarts.map(cart => (
-            <div className={styles.orderedItem}>
+            <div className={styles.orderedItem} key={cart.id}>
               <div className={styles.left}>
                 <Image src={cart.img}/>
               </div>
@@ -34,7 +29,7 @@ export default function cart(){
                   <h4 style={{"width": "100%"}}>Add:</h4>
                   {
                     cart.listAddIngredient.map(igr => (
-                        <div className={styles.extraIgr}>
+                        <div className={styles.extraIgr} key={igr}>
                             <label htmlFor={igr}>{igr}</label>
                         </div>
                     ))
@@ -70,7 +65,7 @@ export default function cart(){
             <div className={styles.listItems}>
               {
                 listCarts.map(cart => (
-                  <div className={styles.item}>
+                  <div className={styles.item} key={cart.id}>
                     <h4>{cart.name} - {cart.id}</h4>
                     <p>{cart.qty}</p>
                     <p>{cart.qty * cart.price}</p>
