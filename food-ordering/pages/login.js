@@ -7,7 +7,7 @@ import { AuthenticationContext } from "../ReactHooks/AutheticationContext";
 import { IoCheckmarkCircleSharp, IoCreateOutline, IoGiftOutline, IoBagHandleOutline } from "react-icons/io5";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 
-export default function login () {
+export default function Login () {
     const darkTheme = useContext(ThemeContext)
     const {err, authenticatedAccount, success, logIn} = useContext(AuthenticationContext);
     const [account, setAccount] = useState({username: "", pwd: ""});

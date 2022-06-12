@@ -45,7 +45,7 @@ export default function deliveryServices(){
               <h4>Delivery Times</h4>
               <div className={styles.serviceContent}>
               <h5>Who needs this services?</h5>
-              <p>You're busy, you can not handle cooking and preparing your meal!</p>
+              <p>You&apos;re busy, you can not handle cooking and preparing your meal!</p>
               <h5>There are three options:</h5>
                 <p> - 3 times: Saving money 10% compared to normal delivery.</p>
                 <p> - 5 times: Saving money 20% compared to normal delivery.</p>

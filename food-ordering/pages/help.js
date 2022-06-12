@@ -26,7 +26,7 @@ export default function help(){
         <h2>Does have any discounts for students?</h2>
         <p><BsArrowReturnRight style={{marginRight: "10px"}}/>Yes, of course! We always give 10% of bill for students.</p>
       </div>
-        <p className={styles.command}>"There are all common questions we received from customers, we hope that they can solve your questions. However, if having no same your thinking. Please contact us! "</p>
+        <p className={styles.command}>&quot;There are all common questions we received from customers, we hope that they can solve your questions. However, if having no same your thinking. Please contact us! &quot;</p>
 
       </div>
     </div>

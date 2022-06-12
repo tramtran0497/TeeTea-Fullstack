@@ -7,7 +7,7 @@ import { MenuList } from "../Components/MenuList"
 import Head from 'next/head'
 
 
-export default function menu() {
+export default function Menu() {
     const [ index, setIndex] = useState(0)
     const [menuName, setMenuName] = useState("main")
 

@@ -17,7 +17,7 @@ export default function Carts(){
           listCarts.length ? listCarts.map(cart => (
             <div className={styles.orderedItem} key={cart.id}>
               <div className={styles.left}>
-                <Image src={cart.img}/>
+                <Image src={cart.img} alt={cart.name}/>
               </div>
             <div className={styles.right}>
               <div className={styles.title}>

@@ -103,14 +103,14 @@ export default function Product () {
 
                         <label className={styles.title}> Choose addition ingredients for your meal:</label>
                         {
-                            item?.listAddIngredient?.map(igr => (
-                                <div className={styles.extraIgr}>
+                            item?.listAddIngredient?.map((igr, index) => (
+                                <div className={styles.extraIgr} key={index}>
                                     <input type="checkbox" id={igr} name={igr} value={igr} onChange={handleCheck}/>
                                     <label>{igr}</label>
                                 </div>
                             ))
                         }
-                        <div>You want to add more: {extraList?.map(extraItem => <span> {extraItem},</span>)}</div>
+                        <div>You want to add more: {extraList?.map((extraItem, index) => <span key={index}> {extraItem},</span>)}</div>
                         <label className={styles.title} htmlFor="note">Unique taste! Leave your note here!</label>
                         <input type="text" placeholder="E.g: Allergic to sesame" className={styles.note} id="note" name="note"/>
 

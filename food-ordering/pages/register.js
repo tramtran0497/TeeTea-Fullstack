@@ -18,18 +18,18 @@ export default function register(){
           <input type="email" placeHolder="Leave your email address..." className={styles.input}/>
           <input type="text" placeHolder="Leave your phone number..." className={styles.input}/>
           <select name="case" id="case" className={styles.select}>
-            <option value="none">You know "TeeTea" by...</option>
+            <option value="none">&quot;You know TeeTea&quot; by...</option>
             <option value="compliment">Friends or Family</option>
             <option value="complain">Social Media</option>
             <option value="support">Poster</option>
           </select>
           <div className={styles.radio}>
             <input type="checkbox" id="agree" name="agree" value="agree" />
-            <label for="agree">By creating an account, you confirm that agree to be bound by our Privacy Policy and Terms of Use</label>
+            <label htmlFor="agree">By creating an account, you confirm that agree to be bound by our Privacy Policy and Terms of Use</label>
           </div>
           <div className={styles.radio}>
             <input type="checkbox" id="disagree" name="disagree" value="disagree" />
-            <label for="disagree">You would like to receive events from TeeTea through your contact</label>
+            <label htmlFor="disagree">You would like to receive events from TeeTea through your contact</label>
           </div>
           <button className={styles.btn}>Submit</button>
         </form>

@@ -13,7 +13,6 @@ export const ListBestProducts = () => {
             const url ="https://teetea-api.herokuapp.com/products"
             try {
               const { data: response } = await axios.get(url)
-              console.log("AAAAA",response)
               setData(response)
             } catch (error) {
               console.error("EEEE",error);
@@ -31,7 +30,7 @@ export const ListBestProducts = () => {
                Your feeling as relax, enjoy your meal and chill the music after stressing in life.
                Friends and Family are around you!!! 
             </p>
-            <p>Here, List best foods and drinks are received much love from customers in this spring term, Let's try them with your friends and family!</p>
+            <p>Here, List best foods and drinks are received much love from customers in this spring term, Let&apos;s try them with your friends and family!</p>
         </div>
         <div className={styles.listProducts}>
             <div className={styles.listFoods}>   

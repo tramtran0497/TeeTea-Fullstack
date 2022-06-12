@@ -6,7 +6,7 @@ import { GiCookingPot } from "react-icons/gi";
 import { IoFastFoodOutline, IoHappyOutline, IoThumbsUpOutline } from "react-icons/io5";
 import Head from 'next/head';
 
-export default function orders() {
+export default function Orders() {
     // hard code: user has current order
     const [isOrdering, setIsOrdering] = useState(true);
     // hard code processing
@@ -46,7 +46,7 @@ export default function orders() {
                             <IoThumbsUpOutline className={styles.icon}/>
                             <p>Ready</p>
                         </div>
-                    </div>) : (<p className={styles.command}>Sorry, you do not have any orders right now, let's order your meal!</p>)
+                    </div>) : (<p className={styles.command}>Sorry, you do not have any orders right now, let&apos;s order your meal!</p>)
                 }
             </div>
             <div className={styles.historyList}>
