@@ -1,5 +1,5 @@
 import styles from "../styles/Menu.module.css";
-import Image from "next/image";
+import Image from "./Image";
 import Link from 'next/link';
 
 export const MenuSlidesCard = ({dish}) => {

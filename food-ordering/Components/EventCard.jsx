@@ -1,6 +1,6 @@
 import { useState } from "react"
 import styles from "../styles/Event.module.css"
-import Image from 'next/image'
+import Image from "./Image"
 
 export const EventCard = ({event}) => {
     const [isShowMore, setIsShowMore] = useState(false)

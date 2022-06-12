@@ -1,5 +1,5 @@
 import styles from "../styles/Cart.module.css";
-import Image from "next/image";
+import Image from "../Components/Image";
 import { FaTrashAlt } from "react-icons/fa";
 import { ChangeQty } from "../Components/ChangeQty";
 import { useSelector } from "react-redux";

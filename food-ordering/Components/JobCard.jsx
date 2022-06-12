@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "./Image";
 import styles from "../styles/Career.module.css"
 
 export const JobCard = ({position}) => {

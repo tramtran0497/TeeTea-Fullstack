@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from "../Components/Image";
 import { ListBestProducts } from '../Components/ListBestProducts';
 import { SlidesFeature } from '../Components/SlidesFeature';
 import styles from '../styles/Home.module.css';

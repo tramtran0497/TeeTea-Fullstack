@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import styles from "../styles/NavBarUser.module.css";
-import Image from "next/image";
+import Image from "./Image";
 import user1 from "../public/img/user-1.avif";
 import { IoSettingsOutline, IoLogOutOutline, IoRestaurantOutline, IoFastFoodOutline, IoGiftOutline, IoHelpCircleOutline, IoLogInOutline, IoPersonAddOutline } from "react-icons/io5";
 import Link from 'next/link';

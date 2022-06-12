@@ -1,5 +1,5 @@
 import styles from "../../styles/Product.module.css"
-import Image from "next/image"
+import Image from "../../Components/Image"
 import { BsCupStraw } from "react-icons/bs"
 import Head from "next/head"
 import { useEffect, useState } from "react"

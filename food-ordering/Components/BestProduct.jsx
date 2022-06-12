@@ -1,6 +1,6 @@
 // import styles from "../styles/ListBestProducts.module.css";
 import styles from "../styles/BestProduct.module.css";
-import Image from "next/image";
+import Image from "./Image";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { addToCart, removeFromCart } from "../Redux/Cart/action";

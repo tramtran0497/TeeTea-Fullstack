@@ -1,6 +1,6 @@
 import styles from "../styles/SlidesFeature.module.css";
 import { BiChevronsLeft, BiChevronsRight } from "react-icons/bi";
-import Image from "next/image";
+import Image from "./Image";
 import { useState } from "react";
 import {listSlides} from "../fakeData/SlidesData.js"
 
