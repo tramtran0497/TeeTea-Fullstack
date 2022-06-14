@@ -121,3 +121,10 @@
 .formApplyJob form textarea:focus-visible{
     outline-color: transparent;
 }
+
+.formApplyJob .formCheck{
+    background-color: rgb(174, 228, 160);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}

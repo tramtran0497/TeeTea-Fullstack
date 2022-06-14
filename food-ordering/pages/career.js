@@ -4,6 +4,8 @@ import Head from 'next/head';
 import {recruitList} from "../fakeData/MenuData";
 import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { FcCheckmark, FcHighPriority } from "react-icons/fc";
+
 
 export default function contact () {
     const [candidateName, setCandidateName] = useState(null);
@@ -11,10 +13,18 @@ export default function contact () {
     const [candidatePhone, setCandidatePhone] = useState(null);
     const [candidatePosition, setCandidatePosition] = useState(null);
     const [candidateMessage, setCandidateMessage] = useState(null);
+    const [isSent, setIsSent] = useState(false);
     const form = useRef();
 
     useEffect(() => {
-    })
+        const timeId = setTimeout(() => {
+          setIsSent(false)
+        }, 2000)
+    
+        return () => {
+          clearTimeout(timeId)
+        }
+    }, [isSent]);
   
     const sendEmail = (e) => {
       e.preventDefault();
@@ -22,8 +32,10 @@ export default function contact () {
       emailjs.sendForm(process.env.NEXT_PUBLIC_SERVICE, process.env.NEXT_PUBLIC_TEMPLATE, form.current, process.env.NEXT_PUBLIC_USER)
         .then((result) => {
             console.log(result.text);
+            setIsSent(true);
         }, (error) => {
             console.log(error.text);
+            setIsSent(false);
         });
 
         setCandidateName("");
@@ -55,7 +67,7 @@ export default function contact () {
                     <input type="text" className={styles.textarea} placeholder="what do you wish for this position? Part-time or Full-time?" name="message" value={candidateMessage} onChange={event => setCandidateMessage(event.target.value)} required/>
                     <button className={styles.btn}>Apply Application Form</button>
                 </form>
-                <p></p>
+                {isSent ? <p className={`${styles.formCheck} ${styles.success}`}><FcCheckmark/> Your application is successfully sent to our Human Resource Department</p> : null}
             </div>
         </div>
     );
