@@ -31,10 +31,13 @@ const product = {
 }
 
 const setUpDBProduct = async() => {
+    await (new User(admin)).save() 
+    await (new Product(product)).save()
+}
+
+const setUpAfterDbProduct = async() => {
     await User.deleteMany()
-    await new User(admin).save() 
     await Product.deleteMany()
-    await new Product(product).save()
 }
 
 module.exports = {
@@ -42,5 +45,6 @@ module.exports = {
     productId,
     admin, 
     adminId,
-    setUpDBProduct
+    setUpDBProduct,
+    setUpAfterDbProduct
 }

@@ -18,6 +18,16 @@ export const BestProduct = ({ product, height }) => {
             setData(item);
         }
     }
+
+    const fetchData = async() => {
+        const resJson = await fetch("https://teetea-api.herokuapp.com/products")
+        const data = await resJson.json()
+    }
+
+    useEffect(() => {
+        console.log(fetchData())
+    })
+
     useEffect(() => {
         if (isAdded === true) {
             dispatch(addToCart(data));

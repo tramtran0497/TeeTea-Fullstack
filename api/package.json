@@ -6,10 +6,11 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "env-cmd -f ./config/dev.env nodemon src/server.js",
-    "test": "env-cmd -f ./config/test.env jest --watch"
+    "test": "env-cmd -f ./config/unittest.env jest"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testTimeout": 30000
   },
   "author": "",
   "license": "ISC",

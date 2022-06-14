@@ -34,9 +34,14 @@ const admin = {
 }
 
 const setUpDB = async() => {
-    await User.deleteMany()
     await new User(userOne).save()
     await new User(admin).save()
+    jest.setTimeout(90 * 1000)
+
+}
+
+const setUpAfterDB = async() => {
+    await User.deleteMany()
 }
 
 module.exports = {
@@ -44,5 +49,6 @@ module.exports = {
     userOneId,
     admin, 
     adminId,
-    setUpDB
+    setUpDB,
+    setUpAfterDB
 }

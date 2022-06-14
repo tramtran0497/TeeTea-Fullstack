@@ -2,10 +2,10 @@ const request = require("supertest")
 const app = require("../src/app")
 const supertest = request(app)
 const User = require("../src/models/User")
-const {userOne, userOneId, setUpDB, admin, adminId} = require("./fixtures/userDb")
+const {userOne, userOneId, setUpDB, admin, adminId, setUpAfterDB} = require("./fixtures/userDb")
 
 beforeEach(setUpDB)
-
+afterEach(setUpAfterDB)
     test(`should return status code 200 when creating a new account`, async() => {
         await supertest
             .post("/users")

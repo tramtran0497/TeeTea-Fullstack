@@ -3,9 +3,10 @@ const app = require("../src/app")
 const supertest = request(app)
 const Job = require("../src/models/Job")
 const User = require("../src/models/User")
-const {jobId, job, setUpDBJob, admin, adminId} = require("./fixtures/jobDb") 
+const {jobId, job, setUpDBJob, admin, adminId, setUpAfterDbJob} = require("./fixtures/jobDb") 
 
 beforeEach(setUpDBJob)
+afterEach(setUpAfterDbJob)
 
     test(`should return status code 200 when read jobs`, async() => {
         await supertest
@@ -58,7 +59,7 @@ beforeEach(setUpDBJob)
                 .expect(200)
     })
 
-    test("should return status code 401 when update information of a specific event without permission", async() => {
+    test("should return status code 401 when update information of a specific job without permission", async() => {
         await supertest
                 .put(`/job/${jobId}`)   
                 .set('Content-Type','multipart/form-data')
@@ -66,7 +67,7 @@ beforeEach(setUpDBJob)
                 .expect(401)
     })
 
-    test("should return status code 400 when update information of a specific event invalidation", async() => {
+    test("should return status code 400 when update information of a specific job invalidation", async() => {
         const admin = await User.findById(adminId)
         expect(admin.isAdmin).toBe(true) 
         await supertest

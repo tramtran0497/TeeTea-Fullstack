@@ -3,10 +3,10 @@ const app = require("../src/app")
 const supertest = request(app)
 const Event = require("../src/models/Event")
 const User = require("../src/models/User")
-const {eventId, event, setUpDBEvent, admin, adminId} = require("./fixtures/eventDb") 
+const {eventId, event, setUpDBEvent, admin, adminId, setUpAfterDbEvent} = require("./fixtures/eventDb") 
 
 beforeEach(setUpDBEvent)
-
+afterEach(setUpAfterDbEvent)
     test(`should return status code 200 when read events`, async() => {
         await supertest
                 .get("/events")
@@ -23,6 +23,7 @@ beforeEach(setUpDBEvent)
 
     test(`should return status code 200 when create an event with Admin permission`, async() => {
         const admin = await User.findById(adminId)
+        // console.log("AAAAA",admin)
         expect(admin.isAdmin).toBe(true)
 
         await supertest
@@ -93,3 +94,4 @@ beforeEach(setUpDBEvent)
                 .send()
                 .expect(401)
     })
+

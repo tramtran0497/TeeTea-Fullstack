@@ -28,10 +28,15 @@ const job = {
 }
 
 const setUpDBJob = async() => {
-    await Job.deleteMany()
     await new Job(job).save()
+    await new User(admin).save()
+    jest.setTimeout(90 * 1000)
+
+}
+
+const setUpAfterDbJob = async() => {
+    await Job.deleteMany()
     await User.deleteMany()
-    await new User(admin).save() 
 }
 
 module.exports = {
@@ -39,5 +44,6 @@ module.exports = {
     jobId,
     admin,
     adminId,
-    setUpDBJob
+    setUpDBJob,
+    setUpAfterDbJob
 }

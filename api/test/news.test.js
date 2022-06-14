@@ -3,9 +3,10 @@ const app = require("../src/app")
 const supertest = request(app)
 const News = require("../src/models/News")
 const User = require("../src/models/User")
-const {newsId, news, setUpDBNews, admin, adminId} = require("./fixtures/newsDb") 
+const {newsId, news, setUpDBNews, admin, adminId, setUpAfterDbNews} = require("./fixtures/newsDb") 
 
 beforeEach(setUpDBNews)
+afterEach(setUpAfterDbNews)
 
     test(`should return status code 200 when read news`, async() => {
         await supertest

@@ -28,10 +28,14 @@ const event = {
 }
 
 const setUpDBEvent = async() => {
-    await Event.deleteMany()
     await new Event(event).save()
+    await new User(admin).save()
+    jest.setTimeout(90 * 1000)
+}
+
+const setUpAfterDbEvent = async() => {
+    await Event.deleteMany()
     await User.deleteMany()
-    await new User(admin).save() 
 }
 
 module.exports = {
@@ -39,5 +43,6 @@ module.exports = {
     eventId,
     admin,
     adminId,
-    setUpDBEvent
+    setUpDBEvent,
+    setUpAfterDbEvent
 }

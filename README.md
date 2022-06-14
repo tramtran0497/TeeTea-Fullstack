@@ -52,3 +52,5 @@ Public fetch data:
 - Read information of all events/ specific event
 - Read information of all news/ specific news
 - Read information of all jobs/ specific job
+
+

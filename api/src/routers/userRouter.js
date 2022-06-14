@@ -54,10 +54,10 @@ router.put("/user/username/avatar", auth, upload.single("avatar"), async(req, re
         // find an user
         const user = await User.findById(req.user._id)
         // delete the old avatar
-        user.avatar = undefined
-        // update the new one
-        const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
-        user.avatar = buffer 
+        // user.avatar = undefined
+        // // update the new one
+        // const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
+        // user.avatar = buffer 
         await user.save()
         res.send(user)
     } catch(error) {

@@ -1,11 +1,12 @@
 const request = require("supertest")
 const app = require("../src/app")
 const supertest = request(app)
-const {admin, adminId, productId, product, setUpDBProduct} = require("./fixtures/productDb")
+const {admin, adminId, productId, product, setUpDBProduct, setUpAfterDbProduct} = require("./fixtures/productDb")
 const User = require("../src/models/User")
 const Product = require("../src/models/Product")
 
 beforeEach(setUpDBProduct)
+afterEach(setUpAfterDbProduct)
 
         test("Create a product by Admin account", async() => {
         const admin = await User.findById(adminId)
