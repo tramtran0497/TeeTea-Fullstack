@@ -4,15 +4,15 @@ import Head from 'next/head';
 import {recruitList} from "../fakeData/MenuData";
 import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { FcCheckmark, FcHighPriority } from "react-icons/fc";
+import { FcCheckmark } from "react-icons/fc";
 
 
 export default function contact () {
-    const [candidateName, setCandidateName] = useState(null);
-    const [candidateEmail, setCandidateEmail] = useState(null);
-    const [candidatePhone, setCandidatePhone] = useState(null);
-    const [candidatePosition, setCandidatePosition] = useState(null);
-    const [candidateMessage, setCandidateMessage] = useState(null);
+    const [candidateName, setCandidateName] = useState("");
+    const [candidateEmail, setCandidateEmail] = useState("");
+    const [candidatePhone, setCandidatePhone] = useState("");
+    const [candidatePosition, setCandidatePosition] = useState("");
+    const [candidateMessage, setCandidateMessage] = useState("");
     const [isSent, setIsSent] = useState(false);
     const form = useRef();
 
@@ -29,7 +29,7 @@ export default function contact () {
     const sendEmail = (e) => {
       e.preventDefault();
   
-      emailjs.sendForm(process.env.NEXT_PUBLIC_SERVICE, process.env.NEXT_PUBLIC_TEMPLATE, form.current, process.env.NEXT_PUBLIC_USER)
+      emailjs.sendForm(process.env.NEXT_PUBLIC_SERVICE, process.env.NEXT_PUBLIC_TEMPLATE_CAREER, form.current, process.env.NEXT_PUBLIC_USER)
         .then((result) => {
             console.log(result.text);
             setIsSent(true);
