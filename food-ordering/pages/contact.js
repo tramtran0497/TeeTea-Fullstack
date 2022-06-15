@@ -2,7 +2,7 @@ import styles from "../styles/Contact.module.css";
 import Head from 'next/head';
 import { useState, useRef, useEffect } from "react";
 import emailjs from '@emailjs/browser';
-
+import { FcCheckmark } from "react-icons/fc";
 
 export default function contact () {
   const [name, setName] = useState("");
@@ -10,7 +10,19 @@ export default function contact () {
   const [phone, setPhone] = useState("");
   const [caseContact, setCaseContact] = useState("");
   const [message, setMessage] = useState("");
+  const [isSent, setIsSent] = useState(false);
   const form = useRef();
+
+  useEffect(() => {
+      const timeId = setTimeout(() => {
+        setIsSent(false)
+      }, 2000)
+  
+      return () => {
+        clearTimeout(timeId)
+      }
+  }, [isSent]
+  )
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -18,8 +30,10 @@ export default function contact () {
     emailjs.sendForm(process.env.NEXT_PUBLIC_SERVICE, process.env.NEXT_PUBLIC_TEMPLATE_CONTACT, form.current, process.env.NEXT_PUBLIC_USER)
       .then((result) => {
           console.log(result.text);
+          setIsSent(true);
       }, (error) => {
           console.log(error.text);
+          setIsSent(false);
       });
 
       setName("");
@@ -54,6 +68,8 @@ export default function contact () {
           <input type="text" placeholder="Leave your words..." className={styles.input} name="message" value={message} onChange={event => setMessage(event.target.value)} required/>
           <button className={styles.btn}>Send</button>
         </form>
+        {isSent ? <p className={styles.formCheck}><FcCheckmark/> Your application is successfully sent to our Human Resource Department</p> : null}
+
       </div>
     </div>
   );
