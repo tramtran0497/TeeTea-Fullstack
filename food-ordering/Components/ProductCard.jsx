@@ -6,7 +6,7 @@ import { addToCart, removeFromCart } from '../Redux/Cart/action';
 import Link from 'next/link';
 import { IoCart, IoEyeSharp, IoHeart } from 'react-icons/io5';
 
-export const BestProduct = ({ product, height }) => {
+export const ProductCard = ({ product, height }) => {
   const [isAdded, setIsAdded] = useState(false);
   const [isLoved, setIsLoved] = useState(false);
 

@@ -1,13 +1,12 @@
 import styles from '../styles/ListBestProducts.module.css';
-import { BestProduct } from './BestProduct';
+import { ProductCard } from './ProductCard';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../Redux/FetchData/fetchData-actions';
-import { FaTruckLoading } from "react-icons/fa";
+import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
 
 export const ListBestProducts = () => {
-  const [data, setData] = useState([]);
+  const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const listProducts = useSelector((state) => state.fetchProduct.listProducts);
   const loading = useSelector((state) => state.fetchProduct.loading);
@@ -18,11 +17,24 @@ export const ListBestProducts = () => {
   }, []);
 
   useEffect(() => {
-    setData(listProducts);
+    setProducts(listProducts);
   }, [listProducts]);
 
   // useEffect(() => console.log("Check data",data))
-  if(loading) return <div className={styles.containerLoading}>Loading... <FaTruckLoading style={{fontSize: "30px", margin: "20px"}}/></div>
+  if (loading)
+    return (
+      <div className={styles.containerLoading}>
+        Loading... <FaTruckLoading style={{ fontSize: '30px', margin: '20px' }} />
+      </div>
+    );
+  else if (error)
+    return (
+      <div className={styles.containerLoading}>
+        Opps <FaRegSadCry style={{ fontSize: '30px', margin: '20px' }} />
+        ...Problems happened! We are fixing.
+        
+      </div>
+    );
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -38,8 +50,8 @@ export const ListBestProducts = () => {
         </p>
       </div>
       <div className={styles.listProducts}>
-        {data.map((product) =>
-          product.type === 'Best seller' ? <BestProduct product={product} /> : ''
+        {products.map((product) =>
+          product.type === 'Best seller' ? <ProductCard product={product} /> : ''
         )}
       </div>
     </div>
