@@ -1,28 +1,27 @@
 import styles from "../styles/ListBestProducts.module.css"
-// import {listProducts} from "../fakeData/MenuData.js"
 import { BestProduct } from "./BestProduct"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../Redux/FetchData/fetchData-actions";
+
 
 export const ListBestProducts = () => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
+    const dispatch = useDispatch();
+    const listProducts = useSelector((state) => state.fetchProduct.listProducts);
+
 
     useEffect(() => {
-        const fetchData = async () => {
-            const url ="https://teetea-api.herokuapp.com/products"
-            try {
-              const { data: response } = await axios.get(url)
-              setData(response)
-            } catch (error) {
-              console.error("EEEE",error);
-            }
-            setLoading(false)
-          }
-      
-          fetchData()
-        }, [])
-    useEffect(() => console.log(data))
+      dispatch(fetchProducts());
+    }, []);
+
+    useEffect(() => {
+      setData(listProducts);
+    }, [listProducts]);
+
+    // useEffect(() => console.log("Check data",data))
   return (
     <div className={styles.container}>
         <div className={styles.title}>

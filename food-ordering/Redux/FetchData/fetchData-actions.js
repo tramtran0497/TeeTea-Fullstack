@@ -4,7 +4,7 @@ import {
     FETCH_DATA_FAILURE,
   } from "./fetchData-types.js";
   
-  export const fetchData = () => async (dispatch) => {
+  export const fetchProducts = () => async (dispatch) => {
     try {
       dispatch({
         type: FETCH_DATA_REQUEST,
