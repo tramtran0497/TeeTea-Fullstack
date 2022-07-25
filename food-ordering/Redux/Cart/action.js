@@ -1,18 +1,17 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "./types";
 
 export const addToCart = (product) => {
-  console.log("Action", product)
   return {
     type: ADD_TO_CART,
     payload: {
-        id: product.id,
+        id: product._id,
         name: product.name,
-        img: product.img,
+        img: product.image,
         size: product.size,
         price: product.price,
-        note: product.note,
+        note: product.note || "Make my meal as normally",
         qty: product.qty,
-        listAddIngredient: product.listAddIngredient,
+        listAdds: product.extra,
     },
   };
 };

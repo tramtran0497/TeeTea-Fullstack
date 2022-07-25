@@ -1,47 +1,45 @@
-.container{
-    margin-top: 130px;
-    width: 100%;
-    height: max-content;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.containerLoading {
+  margin-top: 130px;
+  width: 100%;
+  height: max-content;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 400;
 }
 
-.title{
-    width: 90%;
+.container {
+  margin-top: 130px;
+  width: 100%;
+  height: max-content;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.title h2{
-    font-size: 60px;
-    text-align: center;
-    font-weight: 500;
-    margin-bottom: 30px;
+.title {
+  width: 90%;
 }
 
-.title p{
-    font-size: 20px;
-    text-align: center;
-
+.title h2 {
+  font-size: 60px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 30px;
 }
 
-.listProducts{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
+.title p {
+  font-size: 20px;
+  text-align: center;
 }
 
-.listDrinks, .listFoods{
-    width: 100%;
-    height: max-content;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.listProducts {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-
-.listFoods{
-    margin-bottom: 80px;
-    border-bottom: 2px solid aquamarine;
-}
-
-
