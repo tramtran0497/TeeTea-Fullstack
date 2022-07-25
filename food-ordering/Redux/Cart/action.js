@@ -20,7 +20,7 @@ export const removeFromCart = (product) => {
   return {
     type: REMOVE_FROM_CART,
     payload: {
-        id: product.id,
+        id: product._id,
         name: product.name,
     },
   };

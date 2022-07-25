@@ -1,10 +1,11 @@
-import styles from '../styles/BestProduct.module.css';
+import styles from '../styles/ProductCard.module.css';
 import Image from './Image';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { addToCart, removeFromCart } from '../Redux/Cart/action';
 import Link from 'next/link';
 import { IoCart, IoEyeSharp, IoHeart } from 'react-icons/io5';
+import { love } from '../Redux/Love/actions';
 
 export const ProductCard = ({ product, height }) => {
   const [isAdded, setIsAdded] = useState(false);
@@ -21,7 +22,9 @@ export const ProductCard = ({ product, height }) => {
   const toggleAddLove = (item) => {
     if (product.id === item.id) {
       setIsLoved(!isLoved);
+      dispatch(love(product));
     }
+    
   };
 
   useEffect(() => {
@@ -30,7 +33,8 @@ export const ProductCard = ({ product, height }) => {
     } else {
       dispatch(removeFromCart(product));
     }
-  });
+  }, [isAdded]);
+
   // Detail product
   useEffect(() => console.log(product));
 
@@ -56,7 +60,7 @@ export const ProductCard = ({ product, height }) => {
           <IoHeart
             className={styles.icon}
             onClick={() => toggleAddLove(product)}
-            style={{ color: isAdded ? 'rgb(235, 117, 136)' : '' }}
+            style={{ color: isLoved ? 'rgb(235, 117, 136)' : '' }}
           />
         </div>
       </div>
