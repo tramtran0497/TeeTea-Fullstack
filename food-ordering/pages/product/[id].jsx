@@ -10,6 +10,8 @@ import { addToCart } from "../../Redux/Cart/action"
 
 export default function Product () {
     const router = useRouter()
+    const {id} = router.query
+
     const dispatch = useDispatch();
     const [item, setItem] = useState(null)
     const [priceItem, setPriceItem] = useState(0)
@@ -17,14 +19,18 @@ export default function Product () {
 
     const {listCarts} = useSelector(state => state.cart);
 
-    useEffect(() => {
-        const {id} = router.query
-        if(listProducts.length > 0 && id) {
-          const product = listProducts.find(item => item.id === id)
-          product ? setItem(product) : setItem(null) 
-          setPriceItem(product.price[0])         
-        }
-    }, [listProducts])
+    useEffect(() => {        
+        console.log("Params", id);
+   
+            if(listProducts.length > 0 && id) {
+                console.log(listProducts);
+                const product = listProducts.find(item => item.id === id)
+                product ? setItem(product) : setItem(null) 
+                setPriceItem(product.price[0])         
+              }
+
+  
+    }, [id, listProducts])
 
     const handleSubmit = (event) => {
         event.preventDefault()

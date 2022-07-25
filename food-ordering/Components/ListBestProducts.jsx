@@ -1,5 +1,5 @@
 import styles from "../styles/ListBestProducts.module.css"
-import {listProducts} from "../fakeData/MenuData.js"
+// import {listProducts} from "../fakeData/MenuData.js"
 import { BestProduct } from "./BestProduct"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -22,6 +22,7 @@ export const ListBestProducts = () => {
       
           fetchData()
         }, [])
+    useEffect(() => console.log(data))
   return (
     <div className={styles.container}>
         <div className={styles.title}>
@@ -35,12 +36,7 @@ export const ListBestProducts = () => {
         <div className={styles.listProducts}>
             <div className={styles.listFoods}>   
                 {
-                    listProducts.map(product => product.type === "Best Food Item" ? <BestProduct product={product}/> : "")
-                }
-            </div>
-            <div className={styles.listDrinks}>
-                {
-                    listProducts.map(product => product.type === "Best Drink Item" ? <BestProduct product={product} height="600px"/> : "")
+                    data.map(product => product.type === "Best seller" ? <BestProduct product={product}/> : "")
                 }
             </div>
         </div>

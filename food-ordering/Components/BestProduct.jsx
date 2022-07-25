@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import { addToCart, removeFromCart } from "../Redux/Cart/action";
 import Link from "next/link";
 import { IoCart, IoEyeSharp } from "react-icons/io5";
+import { useRouter } from 'next/router'
 
-export const BestProduct = ({ product, height }) => {
+
+export const BestProduct = ({product, height }) => {
     const [isAdded, setIsAdded] = useState(false);
     const [data, setData] = useState([]);
     const dispatch = useDispatch();
@@ -19,32 +21,25 @@ export const BestProduct = ({ product, height }) => {
         }
     }
 
-    const fetchData = async() => {
-        const resJson = await fetch("https://teetea-api.herokuapp.com/products")
-        const data = await resJson.json()
-    }
-
-    useEffect(() => {
-        console.log(fetchData())
-    })
-
     useEffect(() => {
         if (isAdded === true) {
             dispatch(addToCart(data));
         } else{
             dispatch(removeFromCart(data));
         }
+        
     });
+
     return (
         <div className={styles.wrapper} style={{"height": `${height}`}}>
-            <Image src={product.img} className={styles.img} alt={product.name} />
+            <Image src={product.image} className={styles.img} alt={product.name} layout="fill"/>
             <div className={styles.content}>
                 <h3>{product.name}</h3>
                 <div className={styles.icons}>
                     <IoCart className={styles.icon} onClick={() => toggleAddCart(product)} style={{ "color": isAdded ? "aquamarine" : "white" }} />
                     <Link href={{
                         pathname: '/product/[id]',
-                        query: { id: `${product.id}` }
+                        query: { id: `${product._id}` }
                     }}>
                         <IoEyeSharp className={styles.icon} />
                     </Link>
