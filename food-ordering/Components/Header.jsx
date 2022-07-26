@@ -1,35 +1,38 @@
-import styles from "../styles/NavBar.module.css"
-import {IoFastFoodOutline} from 'react-icons/io5';
-import Link from 'next/link'
+import styles from "../styles/Header.module.css";
+import Link from 'next/link';
 import { RiUserSettingsLine,  RiShoppingCart2Line, RiSunLine, RiMoonLine} from "react-icons/ri";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext, ThemeUpdateContext } from "../ReactHooks/ThemeContext";
 import { useSelector } from "react-redux";
 import { NavBarUser } from "./NavBarUser";
+import Image from "next/image";
+import logo from "../public/img/logo.png"
 
-export const NavBar = () => {
+export const Header = () => {
     const [isShowed, setIsShow] = useState(false);
     const darkTheme = useContext(ThemeContext);
     const toggleTheme = useContext(ThemeUpdateContext);
 
     const {listCarts} = useSelector((state) => state.cart);
     const initialValue = 0;
-    const totalQty = listCarts.map(cart => cart.qty).reduce((pre, current) => pre + current, initialValue)
+    const totalQty = listCarts.map(cart => cart.qty).reduce((pre, current) => pre + current, initialValue);
 
     const handleShow = () => {
         setIsShow(!isShowed);
-    }
+    };
 
-    useEffect(() => {
-    });
+    const customLoader = ({ src }) => {
+        return src
+    };
 
     return(
         <div className={styles.container}>
             <div className={styles.left}>
-                <IoFastFoodOutline className={styles.icon}/> 
-                <Link href="/">
-                    <h1>TeeTea</h1>
-                </Link>
+                <div className={styles.imgWrapper}>
+                    <Link href="/">
+                        <Image src={logo} className={styles.img} alt="Logo" loader={customLoader}/>
+                    </Link>
+                </div>
             </div>
             <div className={styles.center}>
                 <ul className={styles.listItems}>
@@ -66,5 +69,5 @@ export const NavBar = () => {
                 <NavBarUser style={isShowed ? "0%" : "100%"}/>
             </div>
         </div>
-    )
-}
+    );
+};

@@ -1,6 +1,7 @@
-import styles from "../styles/Footer.module.css"
-import {IoLogoLinkedin, IoLogoGithub, IoLogoWhatsapp, IoLogoFacebook} from "react-icons/io5"
-import { BiPhoneCall, BiNotepad, BiDonateHeart, BiCycling, BiMap} from "react-icons/bi";
+import styles from "../styles/Footer.module.css";
+import {IoLogoLinkedin, IoLogoGithub, IoLogoWhatsapp, IoLogoFacebook} from "react-icons/io5";
+import { BiPhoneCall, BiNotepad, BiDonateHeart, BiMap} from "react-icons/bi";
+import { MdOutlineDeliveryDining } from "react-icons/md";
 import Link from 'next/link';
 
 export const Footer = () => {
@@ -66,7 +67,7 @@ export const Footer = () => {
                     <BiPhoneCall className={styles.contactIcons}/><span className={styles.phoneNum}>+358 412 345 678</span>
                     <BiNotepad className={styles.contactIcons}/><span className={styles.phoneNum}>+358 412 345 678</span>
                     <BiDonateHeart className={styles.contactIcons}/><span className={styles.phoneNum}>+358 412 345 678</span>
-                    <BiCycling className={styles.contactIcons}/><span className={styles.phoneNum}>+358 412 345 678</span>
+                    <MdOutlineDeliveryDining className={styles.contactIcons}/><span className={styles.phoneNum}>+358 412 345 678</span>
                 </div>
                 <div className={styles.listIcons}>
                     <Link href="https://www.linkedin.com/in/tram-tran-924301207/" >

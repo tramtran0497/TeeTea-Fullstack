@@ -36,7 +36,7 @@ export const ListBestProducts = () => {
       </div>
     );
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="best-seller">
       <div className={styles.title}>
         <h2>Best Foods & Drinks</h2>
         <p>

@@ -1,5 +1,5 @@
 import { Footer } from "./Footer"
-import { NavBar } from "./NavBar"
+import { Header } from "./Header"
 import {useContext} from 'react'
 import { ThemeContext } from '../ReactHooks/ThemeContext'
 
@@ -8,7 +8,7 @@ export const Layout = ({children}) => {
 
     return(
         <>
-            <NavBar/>
+            <Header/>
             <div style={{"backgroundColor": darkTheme ? "black" : "white", "color": darkTheme ? "white": "black"}}>
               {children}
             </div>
