@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { IoCart, IoEyeSharp, IoHeart } from 'react-icons/io5';
 import { love } from '../Redux/Love/actions';
 
-export const ProductCard = ({ product, height }) => {
+export const ProductCard = ({ product }) => {
   const [isAdded, setIsAdded] = useState(false);
   const [isLoved, setIsLoved] = useState(false);
 

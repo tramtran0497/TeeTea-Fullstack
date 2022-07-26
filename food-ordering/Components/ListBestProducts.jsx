@@ -6,7 +6,7 @@ import { fetchProducts } from '../Redux/FetchData/fetchData-actions';
 import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
 
 export const ListBestProducts = () => {
-  const [products, setProducts] = useState([]);
+  const [listDisplayProducts, setListDisplayProducts] = useState([]);
   const dispatch = useDispatch();
   const listProducts = useSelector((state) => state.fetchProduct.listProducts);
   const loading = useSelector((state) => state.fetchProduct.loading);
@@ -17,7 +17,7 @@ export const ListBestProducts = () => {
   }, []);
 
   useEffect(() => {
-    setProducts(listProducts);
+    setListDisplayProducts(listProducts);
   }, [listProducts]);
 
   // useEffect(() => console.log("Check data",data))
@@ -50,7 +50,7 @@ export const ListBestProducts = () => {
         </p>
       </div>
       <div className={styles.listProducts}>
-        {products.map((product) =>
+        {listDisplayProducts.map((product) =>
           product.type === 'Best seller' ? <ProductCard product={product} /> : ''
         )}
       </div>
