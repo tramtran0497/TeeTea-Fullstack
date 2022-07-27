@@ -1,4 +1,4 @@
-import { LOVE } from "./types";
+import { LOVE } from './types';
 
 export const love = (product) => {
   return {

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from "../Components/Image";
 import { ListBestProducts } from '../Components/ListBestProducts';
 import { SlidesFeature } from '../Components/SlidesFeature';
 import styles from '../styles/Home.module.css';
@@ -12,9 +11,9 @@ export default function Home() {
         <meta name="description" content="Best Street Food in Lahti" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <SlidesFeature/>
-      <ListBestProducts/>
+
+      <SlidesFeature />
+      <ListBestProducts />
     </div>
-  )
+  );
 }

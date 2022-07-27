@@ -1,8 +1,8 @@
-import { Layout } from '../Components/Layout'
-import '../styles/globals.css'
-import {ThemeProvider} from "../ReactHooks/ThemeContext"
-import { Provider } from "react-redux";
-import store from "../Redux/store"
+import { Layout } from '../Components/Layout';
+import '../styles/globals.css';
+import { ThemeProvider } from '../ReactHooks/ThemeContext';
+import { Provider } from 'react-redux';
+import store from '../Redux/store';
 import { AuthenticationProvider } from '../ReactHooks/AutheticationContext';
 
 function MyApp({ Component, pageProps }) {
@@ -11,14 +11,14 @@ function MyApp({ Component, pageProps }) {
       <ThemeProvider>
         <AuthenticationProvider>
           <div>
-              <Layout>
-                <Component {...pageProps}/>
-              </Layout>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </div>
         </AuthenticationProvider>
-      </ThemeProvider> 
+      </ThemeProvider>
     </Provider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

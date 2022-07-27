@@ -1,26 +1,20 @@
 import styles from '../styles/ListBestProducts.module.css';
 import { ProductCard } from './ProductCard';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../Redux/FetchData/fetchData-actions';
+import { useSelector } from 'react-redux';
 import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
 
 export const ListBestProducts = () => {
   const [listDisplayProducts, setListDisplayProducts] = useState([]);
-  const dispatch = useDispatch();
   const listProducts = useSelector((state) => state.fetchProduct.listProducts);
   const loading = useSelector((state) => state.fetchProduct.loading);
   const error = useSelector((state) => state.fetchProduct.error);
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
-
-  useEffect(() => {
     setListDisplayProducts(listProducts);
   }, [listProducts]);
 
-  // useEffect(() => console.log("Check data",data))
+  // useEffect(() => console.log("Check data",listDisplayProducts))
   if (loading)
     return (
       <div className={styles.containerLoading}>
@@ -32,7 +26,6 @@ export const ListBestProducts = () => {
       <div className={styles.containerLoading}>
         Opps <FaRegSadCry style={{ fontSize: '30px', margin: '20px' }} />
         ...Problems happened! We are fixing.
-        
       </div>
     );
   return (
@@ -50,8 +43,8 @@ export const ListBestProducts = () => {
         </p>
       </div>
       <div className={styles.listProducts}>
-        {listDisplayProducts.map((product) =>
-          product.type === 'Best seller' ? <ProductCard product={product} /> : ''
+        {listDisplayProducts?.map((product) =>
+          product.type === 'Best seller' ? <ProductCard product={product} key={product.id} /> : ''
         )}
       </div>
     </div>

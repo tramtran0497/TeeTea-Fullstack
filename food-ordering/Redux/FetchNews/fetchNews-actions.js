@@ -26,5 +26,5 @@ export const fetchNews = () => async (dispatch) => {
       type: FETCH_NEWS_FAILURE,
       message: error,
     });
-  };
+  }
 };

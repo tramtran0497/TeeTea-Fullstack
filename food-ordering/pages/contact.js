@@ -1,46 +1,54 @@
-import styles from "../styles/Contact.module.css";
+import styles from '../styles/Contact.module.css';
 import Head from 'next/head';
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
-import { FcCheckmark } from "react-icons/fc";
+import { FcCheckmark } from 'react-icons/fc';
 
-export default function contact () {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [caseContact, setCaseContact] = useState("");
-  const [message, setMessage] = useState("");
+export default function contact() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [caseContact, setCaseContact] = useState('');
+  const [message, setMessage] = useState('');
   const [isSent, setIsSent] = useState(false);
   const form = useRef();
 
   useEffect(() => {
-      const timeId = setTimeout(() => {
-        setIsSent(false)
-      }, 2000)
-  
-      return () => {
-        clearTimeout(timeId)
-      }
-  }, [isSent]
-  )
+    const timeId = setTimeout(() => {
+      setIsSent(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [isSent]);
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm(process.env.NEXT_PUBLIC_SERVICE, process.env.NEXT_PUBLIC_TEMPLATE_CONTACT, form.current, process.env.NEXT_PUBLIC_USER)
-      .then((result) => {
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_SERVICE,
+        process.env.NEXT_PUBLIC_TEMPLATE_CONTACT,
+        form.current,
+        process.env.NEXT_PUBLIC_USER
+      )
+      .then(
+        (result) => {
           console.log(result.text);
           setIsSent(true);
-      }, (error) => {
+        },
+        (error) => {
           console.log(error.text);
           setIsSent(false);
-      });
+        }
+      );
 
-      setName("");
-      setEmail("");
-      setPhone("");
-      setCaseContact("");
-      setMessage("");
+    setName('');
+    setEmail('');
+    setPhone('');
+    setCaseContact('');
+    setMessage('');
   };
 
   return (
@@ -52,25 +60,70 @@ export default function contact () {
       </Head>
 
       <h1 className={styles.title}>Customer Service</h1>
-      <subtitle className={styles.subTil}>(We warmly welcome feedback from customers, they are strong power to develop us)</subtitle>
+      <subtitle className={styles.subTil}>
+        (We warmly welcome feedback from customers, they are strong power to develop us)
+      </subtitle>
       <div className={styles.wrapper}>
         <form ref={form} onSubmit={sendEmail}>
-          <input type="text" placeholder="Leave your name..." className={styles.input} name="name" value={name} onChange={event => setName(event.target.value)} required/>
-          <input type="email" placeholder="Leave your email address..." className={styles.input} name="email" value={email} onChange={event => setEmail(event.target.value)} required/>
-          <input type="tel"  pattern="^\d{3}-\d{3}-\d{4}$" placeholder="Phone number with format XXX-XXX-XXXX" className={styles.input} name="phoneNumber" value={phone} onChange={event => setPhone(event.target.value)} required/>
-          <select name="case" id="case" className={styles.select} value={caseContact} onChange={event => setCaseContact(event.target.value)}required>
+          <input
+            type="text"
+            placeholder="Leave your name..."
+            className={styles.input}
+            name="name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Leave your email address..."
+            className={styles.input}
+            name="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+          <input
+            type="tel"
+            pattern="^\d{3}-\d{3}-\d{4}$"
+            placeholder="Phone number with format XXX-XXX-XXXX"
+            className={styles.input}
+            name="phoneNumber"
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
+            required
+          />
+          <select
+            name="case"
+            id="case"
+            className={styles.select}
+            value={caseContact}
+            onChange={(event) => setCaseContact(event.target.value)}
+            required
+          >
             <option value="none">Choose your case...</option>
             <option value="compliment">Compliment</option>
             <option value="complain">Complain</option>
             <option value="support">Support</option>
             <option value="asking">Ask Questions</option>
           </select>
-          <input type="text" placeholder="Leave your words..." className={styles.input} name="message" value={message} onChange={event => setMessage(event.target.value)} required/>
+          <input
+            type="text"
+            placeholder="Leave your words..."
+            className={styles.input}
+            name="message"
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+            required
+          />
           <button className={styles.btn}>Send</button>
         </form>
-        {isSent ? <p className={styles.formCheck}><FcCheckmark/> Your application is successfully sent to our Human Resource Department</p> : null}
-
+        {isSent ? (
+          <p className={styles.formCheck}>
+            <FcCheckmark /> Your application is successfully sent to our Human Resource Department
+          </p>
+        ) : null}
       </div>
     </div>
   );
-};
+}

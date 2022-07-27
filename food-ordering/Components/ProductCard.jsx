@@ -1,5 +1,5 @@
 import styles from '../styles/ProductCard.module.css';
-import Image from './Image';
+import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { addToCart, removeFromCart } from '../Redux/Cart/action';
@@ -24,7 +24,6 @@ export const ProductCard = ({ product }) => {
       setIsLoved(!isLoved);
       dispatch(love(product));
     }
-    
   };
 
   useEffect(() => {
@@ -36,34 +35,51 @@ export const ProductCard = ({ product }) => {
   }, [isAdded]);
 
   // Detail product
-  useEffect(() => console.log(product));
+  // useEffect(() => console.log(product));
 
-  return (
-    <div className={styles.wrapper}>
-      <Image src={product.image} className={styles.img} alt={product.name} layout="fill" />
-      <div className={styles.content}>
-        <h3>{product.name}</h3>
-        <div className={styles.icons}>
-          <IoCart
-            className={styles.icon}
-            onClick={() => toggleAddCart(product)}
-            style={{ color: isAdded ? 'rgb(235, 117, 136)' : '' }}
-          />
-          <Link
-            href={{
-              pathname: '/product/[id]',
-              query: { id: `${product._id}` },
-            }}
-          >
-            <IoEyeSharp className={styles.icon} />
-          </Link>
-          <IoHeart
-            className={styles.icon}
-            onClick={() => toggleAddLove(product)}
-            style={{ color: isLoved ? 'rgb(235, 117, 136)' : '' }}
-          />
+  const customLoader = ({ src }) => {
+    return src;
+  };
+
+  if (!product) {
+    return <div>There is nothing!</div>;
+  } else {
+    return (
+      <div className={styles.wrapper}>
+        <Image
+          src={product.image}
+          className={styles.img}
+          alt={product.name}
+          layout="fill"
+          loader={customLoader}
+        />
+        <div className={styles.content}>
+          <h3>{product.name}</h3>
+          <div className={styles.icons}>
+            <IoCart
+              className={styles.icon}
+              onClick={() => toggleAddCart(product)}
+              style={{ color: isAdded ? 'rgb(235, 117, 136)' : '' }}
+            />
+            <Link
+              href={{
+                pathname: '/product/[id]',
+
+                query: { id: `${product.id}` },
+              }}
+            >
+              <a>
+                <IoEyeSharp className={styles.icon} />
+              </a>
+            </Link>
+            <IoHeart
+              className={styles.icon}
+              onClick={() => toggleAddLove(product)}
+              style={{ color: isLoved ? 'rgb(235, 117, 136)' : '' }}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };

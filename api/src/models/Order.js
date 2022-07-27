@@ -1,64 +1,68 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
+const mongoose = require("mongoose");
+const validator = require("validator");
 
-const orderSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema(
+  {
     // expect: orderId can count automatically
-    orderId:{
-        required: true,
-        type: String,
-        trim: true,
-    }, 
+    orderId: {
+      required: true,
+      type: String,
+      trim: true,
+    },
     // connect User collection
-    owner:{
-        required: true,
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-    }, 
-    addressPoint:{
-        required: true,
-        type: String,
-        trim: true,
-    }, 
-    timeTakeOrder:{
-        required: true,
-        type: String,
+    owner: {
+      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
-    status:{
-        required: true,
-        type: String,
-        enum: ["Pick up", "Delivery", "Eat In"],
+    addressPoint: {
+      required: true,
+      type: String,
+      trim: true,
     },
-    listProducts:[{
+    timeTakeOrder: {
+      required: true,
+      type: String,
+    },
+    status: {
+      required: true,
+      type: String,
+      enum: ["Pick up", "Delivery", "Eat In"],
+    },
+    listProducts: [
+      {
         productName: {
-            required: true,
-            type: String,
+          required: true,
+          type: String,
         },
-        extra: [{
+        extra: [
+          {
             type: String,
             trim: true,
-        }],
+          },
+        ],
         note: {
-            type: String,
-            trim: true,
+          type: String,
+          trim: true,
         },
         quantity: {
-            required: true,
-            type: Number,
+          required: true,
+          type: Number,
         },
         price: {
-            required: true,
-            type: Number,
-        }
-    }],
+          required: true,
+          type: Number,
+        },
+      },
+    ],
     totalPrice: {
-        required: true,
-        type: Number,
+      required: true,
+      type: Number,
     },
-    
-    },
-    { timestamps: true }
-)
+  },
+  { timestamps: true }
+);
 
-const Order = mongoose.model("Order", orderSchema)
+const Order = mongoose.model("Order", orderSchema);
 
-module.exports = Order
+module.exports = Order;

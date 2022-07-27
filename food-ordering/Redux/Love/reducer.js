@@ -1,13 +1,11 @@
-import { LOVE } from "./types";
+import { LOVE } from './types';
 
 const INITIAL_STATE = {
   listLove: [],
 };
 
 const loveReducer = (state = INITIAL_STATE, action) => {
-  const existInLove = state.listLove?.find(
-    (item) => item.id === action.payload?.id
-  );
+  const existInLove = state.listLove?.find((item) => item.id === action.payload?.id);
   switch (action.type) {
     case LOVE:
       if (existInLove) {
