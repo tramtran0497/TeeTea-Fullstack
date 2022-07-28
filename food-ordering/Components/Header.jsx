@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 import { ThemeContext, ThemeUpdateContext } from '../ReactHooks/ThemeContext';
 import { useSelector } from 'react-redux';
 import { NavBarUser } from './NavBarUser';
-import Image from 'next/image';
+import Image from './Image';
 import logo from '../public/img/logo.png';
 
 export const Header = () => {
@@ -23,17 +23,13 @@ export const Header = () => {
     setIsShow(!isShowed);
   };
 
-  const customLoader = ({ src }) => {
-    return src;
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.imgWrapper}>
           <Link href="/">
             <a>
-              <Image src={logo} className={styles.img} alt="Logo" loader={customLoader} />
+              <Image src={logo} alt="Logo"/>
             </a>
           </Link>
         </div>

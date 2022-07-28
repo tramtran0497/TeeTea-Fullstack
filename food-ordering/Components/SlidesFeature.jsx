@@ -1,6 +1,6 @@
 import styles from '../styles/SlidesFeature.module.css';
 import { BiChevronsLeft, BiChevronsRight } from 'react-icons/bi';
-import Image from 'next/image';
+import Image from './Image';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -22,10 +22,6 @@ export const SlidesFeature = () => {
 
   // Detail news
   // useEffect(() => console.log(listNews));
-
-  const customLoader = ({ src }) => {
-    return src;
-  };
 
   const handleSlides = (direction) => {
     const lastIndexSlide = listDisplayNews?.length - 1;
@@ -63,13 +59,14 @@ export const SlidesFeature = () => {
               <h2>{news.title}</h2>
               <p>{news.subtitle}</p>
             </div>
-            <Image
-              src={news.image}
-              alt={news.title}
-              className={styles.img}
-              loader={customLoader}
-              layout="fill"
-            />
+            <div className={styles.imgWrapper}>
+              <Image
+                src={news.image}
+                alt={news.title}
+                layout="fill"
+              />
+            </div>
+            
           </div>
         ))}
       </div>

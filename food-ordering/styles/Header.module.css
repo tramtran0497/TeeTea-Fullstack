@@ -25,10 +25,6 @@
   cursor: pointer;
 }
 
-.img {
-  object-fit: contain;
-}
-
 .center {
   width: 40%;
 }

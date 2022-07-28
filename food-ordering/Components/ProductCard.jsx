@@ -1,5 +1,5 @@
 import styles from '../styles/ProductCard.module.css';
-import Image from 'next/image';
+import Image from './Image';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { addToCart, removeFromCart } from '../Redux/Cart/action';
@@ -48,10 +48,8 @@ export const ProductCard = ({ product }) => {
       <div className={styles.wrapper}>
         <Image
           src={product.image}
-          className={styles.img}
           alt={product.name}
           layout="fill"
-          loader={customLoader}
         />
         <div className={styles.content}>
           <h3>{product.name}</h3>

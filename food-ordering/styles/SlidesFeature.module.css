@@ -72,7 +72,7 @@
   text-align: center;
 }
 
-.info subtitle {
+.info p {
   width: 85%;
   color: white;
   font-size: 20px;
@@ -80,8 +80,13 @@
   text-align: center;
 }
 
-.img {
-  object-fit: contain;
+.imgWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 140px);
+  height: 100vh;
+  padding: 0 70px;
 }
 
 .icon {

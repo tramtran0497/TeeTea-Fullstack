@@ -1,10 +1,9 @@
 import styles from '../styles/Menu.module.css';
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { MenuSlidesCard } from '../Components/MenuSlidesCard';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MenuList } from '../Components/MenuList';
 import Head from 'next/head';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
 
@@ -34,7 +33,7 @@ export default function Menu() {
       });
   }, [listProducts]);
 
-  // useEffect(() => console.log("Check in menu", listDisplayMain, listDisplayDrink, listDisplayLD, listDisplaySnack));
+  useEffect(() => console.log("Check in menu", listDisplayMain, listDisplayDrink, listDisplayLD, listDisplaySnack));
 
   const handleClickNavBar = (name) => {
     setMenuName(name);
@@ -47,10 +46,6 @@ export default function Menu() {
       setIndex(index !== 3 ? index + 1 : 0);
     }
   };
-
-  const mainList = listProducts.filter((product) => product.type === 'Main Item');
-  const drinkList = listProducts.filter((product) => product.type === 'Drink Item');
-  const snackList = listProducts.filter((product) => product.type === 'Snack Item');
   if (loading)
     return (
       <div className={styles.containerLoading}>
