@@ -8,20 +8,19 @@ export const EventCard = ({ event }) => {
     setIsShowMore(!isShowMore);
   };
   return (
-    <div className={styles.eventCard} key={event.id}>
+    <div className={styles.eventCard}>
       <div className={styles.left}>
-        <Image src={event.img} className={styles.img} />
+        <Image src={event.image} width="200px" height="180px"/>
       </div>
       <div className={styles.right}>
-        <h3>{event.eventName}</h3>
-        <p>
+        <h3>{event.title}</h3>
+        <div>
           {event.firstWord}
-          {isShowMore ? <p className={styles.more}>{event.des}</p> : ''}
-          <p className={styles.dots} id={event.id} onClick={toggleMore}>
-            {' '}
+          {isShowMore ? <p className={styles.des}>{event.description}</p> : ''}
+          <span className={styles.expand} id={event.id} onClick={toggleMore}>
             {!isShowMore ? 'Read more...' : 'Less more'}
-          </p>
-        </p>
+          </span>
+        </div>
       </div>
     </div>
   );
