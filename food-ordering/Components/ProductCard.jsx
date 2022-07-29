@@ -46,11 +46,13 @@ export const ProductCard = ({ product }) => {
   } else {
     return (
       <div className={styles.wrapper}>
-        <Image
+        <div className={styles.imgWrapper}>
+          <Image
           src={product.image}
           alt={product.name}
           layout="fill"
-        />
+          />
+        </div>
         <div className={styles.content}>
           <h3>{product.name}</h3>
           <div className={styles.icons}>

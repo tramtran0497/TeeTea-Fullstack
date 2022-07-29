@@ -1,10 +1,10 @@
 import NextImage from 'next/image';
-import styles from "./Image";
+import styles from "../styles/Image.module.css";
 
 const customLoader = ({ src }) => {
   return src;
 };
 
 export default function Image(props) {
-  return <NextImage {...props} loader={customLoader} unoptimized={true} className={styles.img} width="100%" height="100%"/>;
+  return <NextImage {...props} loader={customLoader} unoptimized={true} className={styles.img}/>;
 }

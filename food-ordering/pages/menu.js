@@ -33,7 +33,7 @@ export default function Menu() {
       });
   }, [listProducts]);
 
-  useEffect(() => console.log("Check in menu", listDisplayMain, listDisplayDrink, listDisplayLD, listDisplaySnack));
+  // useEffect(() => console.log("Check in menu", listDisplayMain, listDisplayDrink, listDisplayLD, listDisplaySnack));
 
   const handleClickNavBar = (name) => {
     setMenuName(name);
@@ -41,9 +41,9 @@ export default function Menu() {
 
   const handleClickMenuSlides = (direction) => {
     if (direction === 'left') {
-      setIndex(index !== 0 ? index - 1 : 3);
+      setIndex(index !== 0 ? index - 1 : 2);
     } else {
-      setIndex(index !== 3 ? index + 1 : 0);
+      setIndex(index !== 2 ? index + 1 : 0);
     }
   };
   if (loading)
@@ -92,11 +92,11 @@ export default function Menu() {
           <BsFillArrowLeftCircleFill
             className={styles.icon}
             onClick={() => handleClickMenuSlides('left')}
-            style={{ left: '10px' }}
+            style={{ left: '10px'}}
           />
           <div
             className={styles.listLDDishes}
-            style={{ transform: `translateX(${-45 * index}vw)` }}
+            style={{ transform: `translateX(${-30 * index}vw)` }}
             id="lunchDinner"
           >
             {listDisplayLD.map((product) => (
@@ -106,7 +106,7 @@ export default function Menu() {
           <BsFillArrowRightCircleFill
             className={styles.icon}
             onClick={() => handleClickMenuSlides('right')}
-            style={{ right: '10px' }}
+            style={{ right: '10px', bottom: "18vh"}}
           />
         </div>
         <div className={styles.menuWrapper}>
