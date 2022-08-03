@@ -120,7 +120,7 @@ export default function contact() {
         </form>
         {isSent ? (
           <p className={styles.formCheck}>
-            <FcCheckmark /> Your application is successfully sent to our Human Resource Department
+            <FcCheckmark /> Your application is successfully sent to our Customer Service Department
           </p>
         ) : null}
       </div>
