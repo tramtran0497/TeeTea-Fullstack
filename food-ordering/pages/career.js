@@ -5,6 +5,9 @@ import { recruitList } from '../fakeData/MenuData';
 import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { FcCheckmark } from 'react-icons/fc';
+import {useDispatch, useSelector} from 'react-redux';
+import { fetchJobs } from '../Redux/FetchJobs/fetchJobs-actions';
+import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
 
 export default function contact() {
   const [candidateName, setCandidateName] = useState('');
@@ -15,6 +18,13 @@ export default function contact() {
   const [isSent, setIsSent] = useState(false);
   const form = useRef();
 
+  const dispatch = useDispatch();
+  const listJobs = useSelector(state => state.fetchJobs.listJobs);
+  const loading = useSelector(state => state.fetchJobs.loading);
+  const error = useSelector(state => state.fetchJobs.error);
+
+  useEffect(() => dispatch(fetchJobs()), []);
+  // useEffect(() => console.log("Check jobs", listJobs, loading, error));
   useEffect(() => {
     const timeId = setTimeout(() => {
       setIsSent(false);
@@ -52,7 +62,19 @@ export default function contact() {
     setCandidatePosition('');
     setCandidateMessage('');
   };
-
+  if (loading)
+    return (
+      <div className={styles.containerLoading}>
+        Loading... <FaTruckLoading style={{ fontSize: '30px', margin: '20px' }} />
+      </div>
+    );
+  else if (error)
+    return (
+      <div className={styles.containerLoading}>
+        Opps <FaRegSadCry style={{ fontSize: '30px', margin: '20px' }} />
+        ...Problems happened! We are fixing.
+      </div>
+    );
   return (
     <div className={styles.container}>
       <Head>
@@ -63,8 +85,8 @@ export default function contact() {
       <div className={styles.wrapper}>
         <h1>WE ARE HIRING...</h1>
         <div className={styles.cards}>
-          {recruitList.map((position, index) => (
-            <JobCard position={position} key={index} />
+          {listJobs.map((job) => (
+            <JobCard position={job} key={job.id} />
           ))}
         </div>
       </div>

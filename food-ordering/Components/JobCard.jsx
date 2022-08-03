@@ -3,17 +3,15 @@ import styles from '../styles/Career.module.css';
 
 export const JobCard = ({ position }) => {
   return (
-    <div className={styles.card} key={position.jobName}>
+    <div className={styles.card}>
       <div className={styles.imgWrapper}>
-        <Image src={position.img} />
+        <Image src={position.image} width="280px" height="200px"/>
       </div>
-      <h2>{position.jobName}</h2>
-      <ul>
-        {position.reqs.map((req, index) => (
-          <li key={index}>{req}</li>
-        ))}
-      </ul>
-      <p>We need: {position.qty} member(s)</p>
+      <h2>{position.title}</h2>
+      <p>
+        {position.description}
+      </p>
+      <p>We need: {position.quantity} member(s)</p>
     </div>
   );
 };

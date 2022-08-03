@@ -1,7 +1,6 @@
 import styles from '../styles/Event.module.css';
 import { EventCard } from '../Components/EventCard';
 import Head from 'next/head';
-import { eventList } from '../fakeData/MenuData';
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from 'react';
 import { fetchEvents } from '../Redux/FetchEvents/fetchEvents-actions';
