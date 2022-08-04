@@ -4,6 +4,7 @@ import fetchProductReducer from './FetchData/fetchData-reducer';
 import fetchEventsReducer from './FetchEvents/fetchEvents-reducer';
 import fetchJobsReducer from './FetchJobs/fetchJobs-reducer';
 import fetchNewsReducer from './FetchNews/fetchNews-reducer';
+import fetchOneProductReducer from './FetchOneProduct/fetchOneProduct-reducer';
 import loveReducer from './Love/reducer';
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   love: loveReducer,
   fetchNews: fetchNewsReducer,
   fetchEvents: fetchEventsReducer,
-  fetchJobs: fetchJobsReducer
+  fetchJobs: fetchJobsReducer,
+  fetchOneProduct: fetchOneProductReducer
 });
 
 export default rootReducer;

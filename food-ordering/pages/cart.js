@@ -15,51 +15,7 @@ export default function Carts() {
     <div className={styles.container}>
       <h1>YOUR ORDER - OUR HAPPINESS</h1>
       <div className={styles.listOrderedItems}>
-        {listCarts.length ? (
-          listCarts.map((cart) => (
-            <div className={styles.orderedItem} key={cart.id}>
-              <div className={styles.left}>
-                <Image src={cart.img} alt={cart.name} />
-              </div>
-              <div className={styles.right}>
-                <div className={styles.title}>
-                  <h2>{cart.name}</h2>
-                  <subtitle>(Product code: {cart.id})</subtitle>
-                </div>
-                <div className={styles.info}>
-                  <div className={styles.infoWrapper}>
-                    <h4 style={{ width: '100%' }}>Add:</h4>
-                    {cart.listAddIngredient.map((igr) => (
-                      <div className={styles.extraIgr} key={igr}>
-                        <label htmlFor={igr}>{igr}</label>
-                      </div>
-                    ))}
-                  </div>
-                  <div className={styles.infoWrapper}>
-                    <h4>Size:</h4>
-                    {/* hard code */}
-                    <p>{cart.size}</p>
-                  </div>
-                  <div className={styles.infoWrapper}>
-                    <h4>Quantity:</h4>
-                    <ChangeQty product={cart} />
-                  </div>
-                  <div className={styles.infoWrapper}>
-                    <h4>Price:</h4>
-                    {/* hard code */}
-                    <p>€ {cart.price}</p>
-                  </div>
-                  <FaTrashAlt className={styles.trashIcon} />
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p className={styles.command}>
-            There is nothing in your cart, please have a look and design you meal today!{' '}
-            <GiHotMeal className={styles.icon} />
-          </p>
-        )}
+       {console.log("AAAAA",listCarts)}
       </div>
 
       {listCarts.length ? (

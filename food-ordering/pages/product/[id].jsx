@@ -1,85 +1,68 @@
 import styles from '../../styles/Product.module.css';
 import Image from '../../Components/Image';
-import { BsCupStraw } from 'react-icons/bs';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { listProducts } from '../../fakeData/MenuData.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../Redux/Cart/action';
+import {fetchOneProduct} from "../../Redux/FetchOneProduct/fetchOneProduct-actions";
+import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
 
 export default function Product() {
   const router = useRouter();
   const { id } = router.query;
 
   const dispatch = useDispatch();
-  const [item, setItem] = useState(null);
-  const [priceItem, setPriceItem] = useState(0);
-  const [extraList, setExtraList] = useState([]);
-
-  const { listCarts } = useSelector((state) => state.cart);
+  const {product, loading, error} = useSelector(state => state.fetchOneProduct);
+  
+  const [item, setItem] = useState({});
+  // const { listCarts } = useSelector((state) => state.cart);
 
   useEffect(() => {
-    console.log('Params', id);
-
-    if (listProducts.length > 0 && id) {
-      console.log(listProducts);
-      const product = listProducts.find((item) => item.id === id);
-      product ? setItem(product) : setItem(null);
-      setPriceItem(product.price[0]);
+    // Check id before dispatch an action
+    if(id){
+      dispatch(fetchOneProduct(id))
     }
-  }, [id, listProducts]);
+  }, [id]);
+
+  useEffect(() => {
+    setItem(product);
+  },[product]);
+
+  // useEffect(() => console.log("ITEM", item))
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const formObj = Object.fromEntries(data.entries());
-    const size = formObj.size;
     const note = formObj.note;
     const qty = parseInt(formObj.quantity);
-    const creatingItem = {
+    const orderedProduct = {
       id: item.id,
       name: item.name,
-      img: item.img,
-      price: priceItem,
-      size,
+      image: item.image,
+      price: item.price[0],
       note,
       qty,
-      listAddIngredient: extraList,
     };
-    // dispatch
-    dispatch(addToCart(creatingItem));
-    // 👇️ clear all input values in the form
+    dispatch(addToCart(orderedProduct));
     event.target.reset();
   };
 
-  const handleSelect = (event) => {
-    event.preventDefault();
-    if (event.target.value === 'none' || event.target.value === 'Small') {
-      setPriceItem(item.price[0]);
-    } else if (event.target.value === 'Medium') {
-      setPriceItem(item.price[1]);
-    } else {
-      setPriceItem(item.price[2]);
-    }
-  };
-
-  const handleCheck = (event) => {
-    const itemName = event.target.name;
-    if (event.target.checked) {
-      setExtraList((pre) => [...pre, itemName]);
-    } else {
-      const removeItem = extraList.find((item) => item === itemName);
-      setExtraList(extraList.filter((item) => item !== removeItem));
-    }
-  };
-
-  // useEffect(() => console.log("Cart item",orderedItem))
-
-  if (!item) {
-    // ToDo: create PAGE404 component
-    return <div>cannot found</div>;
-  } else {
+  if (loading)
+    return (
+      <div className={styles.containerLoading}>
+        Loading... <FaTruckLoading style={{ fontSize: '30px', margin: '20px' }} />
+      </div>
+    );
+  else if (error)
+    return (
+      <div className={styles.containerLoading}>
+        Opps <FaRegSadCry style={{ fontSize: '30px', margin: '20px' }} />
+        ...Problems happened! We are fixing.
+      </div>
+    );
+  else{
     return (
       <div className={styles.container}>
         <Head>
@@ -88,40 +71,31 @@ export default function Product() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <div className={styles.imgWrapper}>
-          <Image src={item.img} alt={item.name} className={styles.img} />
-        </div>
-        <div className={styles.info}>
-          <h2>{item.name}</h2>
-          {priceItem ? <h2>€ {priceItem}</h2> : ''}
+        <div className={styles.left}>
+          <div className={styles.imgWrapper}>
+            <Image
+              src={item.image ? item.image : ".png"}
+              alt={item.name}
+              width="400px"
+              height="300px"
+            />
+          </div>
+        </div> 
+        <div className={styles.right}>
+          <h2 className={styles.name}>{item.name} - {item.price}€</h2>
+          <div className={styles.info}>
+            <label className={styles.title}>Type:</label>
+            <p>{item.type}</p>
+            <label className={styles.title}>Description:</label>
+            <p>{item.description}</p>
+            <label className={styles.title}>Ingredients:</label>
+            <p>{item.ingredients}</p>
+            <label className={styles.title}>You can add (50 cent/each):</label>
+            <p>{item.extra}</p>
+          </div>
           <form action="" onSubmit={handleSubmit}>
-            <label className={styles.title} htmlFor="size">
-              Choose your favor size (only Drinks <BsCupStraw style={{ fontSize: '30px' }} />) :
-            </label>
-            <select name="size" id="size" className={styles.size} onChange={handleSelect}>
-              <option value="none">Select size</option>
-              {item?.size?.map((size) => (
-                <option value={size} key={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
-
-            <label className={styles.title}> Choose addition ingredients for your meal:</label>
-            {item?.listAddIngredient?.map((igr, index) => (
-              <div className={styles.extraIgr} key={index}>
-                <input type="checkbox" id={igr} name={igr} value={igr} onChange={handleCheck} />
-                <label>{igr}</label>
-              </div>
-            ))}
-            <div>
-              You want to add more:{' '}
-              {extraList?.map((extraItem, index) => (
-                <span key={index}> {extraItem},</span>
-              ))}
-            </div>
             <label className={styles.title} htmlFor="note">
-              Unique taste! Leave your note here!
+              Unique taste! Leave your note or add more extra item here!
             </label>
             <input
               type="text"
@@ -135,12 +109,12 @@ export default function Product() {
               <label className={styles.title} htmlFor="quantity">
                 Quantity
               </label>
-              <input type="number" id="quantity" name="quantity" min="0" />
+              <input type="number" id="quantity" name="quantity" min="0" className={styles.qty} />
             </div>
             <input type="submit" value="Add Cart" className={styles.btn} />
           </form>
         </div>
       </div>
     );
-  }
-}
+  };
+};

@@ -60,9 +60,9 @@ export default function contact() {
       </Head>
 
       <h1 className={styles.title}>Customer Service</h1>
-      <subtitle className={styles.subTil}>
+      <p className={styles.subTil}>
         (We warmly welcome feedback from customers, they are strong power to develop us)
-      </subtitle>
+      </p>
       <div className={styles.wrapper}>
         <form ref={form} onSubmit={sendEmail}>
           <input

@@ -48,9 +48,9 @@ export const ProductCard = ({ product }) => {
       <div className={styles.wrapper}>
         <div className={styles.imgWrapper}>
           <Image
-          src={product.image}
-          alt={product.name}
-          layout="fill"
+            src={product.image}
+            alt={product.name}
+            layout="fill"
           />
         </div>
         <div className={styles.content}>
