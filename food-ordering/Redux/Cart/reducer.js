@@ -5,18 +5,31 @@ const INITIAL_STATE = {
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
-  const existInCart = state.listCarts?.find((item) => item.id === action.payload?.id);
+  const existInCart = state.listCarts?.find((item) =>  {
+    if(action.payload?.id === item.id) {
+      return true
+    }
+    else {
+      return false
+  }});
   switch (action.type) {
     case ADD_TO_CART:
       if (existInCart) {
+        console.log("Exist");
         const newState = {
           ...state,
-          listCarts: state.listCarts.map((item) =>
-            item.id === action.payload.id ? { ...item, qty: item.qty + 1 } : item
-          ),
+          listCarts: state.listCarts.map((item) =>{
+            if( item.id === action.payload.id ) {
+              return { ...item, qty: (item.qty + action.payload.qty)}
+            } else {
+              return item
+            }
+          }),
         };
         return newState;
       } else {
+        console.log("No Exist");
+
         const newState = {
           ...state,
           listCarts: [

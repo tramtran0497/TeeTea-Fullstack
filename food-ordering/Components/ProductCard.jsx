@@ -10,6 +10,7 @@ import { love } from '../Redux/Love/actions';
 export const ProductCard = ({ product }) => {
   const [isAdded, setIsAdded] = useState(false);
   const [isLoved, setIsLoved] = useState(false);
+   
 
   const dispatch = useDispatch();
 
@@ -28,7 +29,14 @@ export const ProductCard = ({ product }) => {
 
   useEffect(() => {
     if (isAdded === true) {
-      dispatch(addToCart(product));
+      dispatch(addToCart({
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        price: product.price[0],
+        note: 'Make my meal as normally',
+        qty: 1
+      }));
     } else {
       dispatch(removeFromCart(product));
     }
