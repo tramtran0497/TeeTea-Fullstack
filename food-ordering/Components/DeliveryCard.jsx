@@ -8,18 +8,16 @@ export const DeliveryCard = ({ delivery }) => {
   };
   return (
     <div className={styles.serviceWrapper}>
-        <h4 onClick={toggleMore}>{delivery.title}</h4>
-        {
-            isShowMore ? (
-                <div className={styles.serviceContent}>
-                    <p>{delivery.subtitle}</p>
-                    <h5>TeeTea Service: </h5>
-                        {
-                            delivery.content?.map(each => <p>{each}</p>)
-                        }
-                </div>
-            ) : null
-        }
+      <h4 onClick={toggleMore}>{delivery.title}</h4>
+      {isShowMore ? (
+        <div className={styles.serviceContent}>
+          <p>{delivery.subtitle}</p>
+          <h5>TeeTea Service: </h5>
+          {delivery.content?.map((each) => (
+            <p>{each}</p>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

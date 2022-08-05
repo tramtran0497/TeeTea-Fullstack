@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../Redux/Cart/action';
-import {fetchOneProduct} from "../../Redux/FetchOneProduct/fetchOneProduct-actions";
+import { fetchOneProduct } from '../../Redux/FetchOneProduct/fetchOneProduct-actions';
 import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
 
 export default function Product() {
@@ -13,20 +13,20 @@ export default function Product() {
   const { id } = router.query;
 
   const dispatch = useDispatch();
-  const {product, loading, error} = useSelector(state => state.fetchOneProduct);
-  
+  const { product, loading, error } = useSelector((state) => state.fetchOneProduct);
+
   const [item, setItem] = useState({});
 
   useEffect(() => {
     // Check id before dispatch an action
-    if(id){
-      dispatch(fetchOneProduct(id))
+    if (id) {
+      dispatch(fetchOneProduct(id));
     }
   }, [id]);
 
   useEffect(() => {
     setItem(product);
-  },[product]);
+  }, [product]);
 
   // useEffect(() => console.log("ITEM", item))
 
@@ -60,7 +60,7 @@ export default function Product() {
         ...Problems happened! We are fixing.
       </div>
     );
-  else{
+  else {
     return (
       <div className={styles.container}>
         <Head>
@@ -72,15 +72,17 @@ export default function Product() {
         <div className={styles.left}>
           <div className={styles.imgWrapper}>
             <Image
-              src={item.image ? item.image : ".png"}
+              src={item.image ? item.image : '.png'}
               alt={item.name}
               width="400px"
               height="300px"
             />
           </div>
-        </div> 
+        </div>
         <div className={styles.right}>
-          <h2 className={styles.name}>{item.name} - {item.price}€</h2>
+          <h2 className={styles.name}>
+            {item.name} - {item.price}€
+          </h2>
           <div className={styles.info}>
             <label className={styles.title}>Type:</label>
             <p>{item.type}</p>
@@ -106,12 +108,12 @@ export default function Product() {
               <label className={styles.title} htmlFor="quantity">
                 Quantity
               </label>
-              <input type="number" id="quantity" name="quantity" min="0" className={styles.qty}/>
+              <input type="number" id="quantity" name="quantity" min="0" className={styles.qty} />
             </div>
             <input type="submit" value="Add Cart" className={styles.btn} />
           </form>
         </div>
       </div>
     );
-  };
-};
+  }
+}

@@ -29,7 +29,7 @@ export const Header = () => {
         <div className={styles.imgWrapper}>
           <Link href="/">
             <a>
-              <Image src={logo} alt="Logo"/>
+              <Image src={logo} alt="Logo" />
             </a>
           </Link>
         </div>

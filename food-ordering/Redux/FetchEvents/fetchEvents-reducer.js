@@ -1,4 +1,8 @@
-import { FETCH_EVENTS_REQUEST, FETCH_EVENTS_SUCCESS, FETCH_EVENTS_FAILURE } from './fetchEvents-types';
+import {
+  FETCH_EVENTS_REQUEST,
+  FETCH_EVENTS_SUCCESS,
+  FETCH_EVENTS_FAILURE,
+} from './fetchEvents-types';
 
 const INITIAL_STATE = {
   loading: false,

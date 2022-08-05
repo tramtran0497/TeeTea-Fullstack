@@ -5,7 +5,7 @@ import { recruitList } from '../fakeData/MenuData';
 import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { FcCheckmark } from 'react-icons/fc';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchJobs } from '../Redux/FetchJobs/fetchJobs-actions';
 import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
 
@@ -19,9 +19,9 @@ export default function contact() {
   const form = useRef();
 
   const dispatch = useDispatch();
-  const listJobs = useSelector(state => state.fetchJobs.listJobs);
-  const loading = useSelector(state => state.fetchJobs.loading);
-  const error = useSelector(state => state.fetchJobs.error);
+  const listJobs = useSelector((state) => state.fetchJobs.listJobs);
+  const loading = useSelector((state) => state.fetchJobs.loading);
+  const error = useSelector((state) => state.fetchJobs.error);
 
   useEffect(() => dispatch(fetchJobs()), []);
   // useEffect(() => console.log("Check jobs", listJobs, loading, error));

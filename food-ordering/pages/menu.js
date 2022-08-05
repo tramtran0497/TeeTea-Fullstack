@@ -92,7 +92,7 @@ export default function Menu() {
           <BsFillArrowLeftCircleFill
             className={styles.icon}
             onClick={() => handleClickMenuSlides('left')}
-            style={{ left: '10px'}}
+            style={{ left: '10px' }}
           />
           <div
             className={styles.listLDDishes}
@@ -106,7 +106,7 @@ export default function Menu() {
           <BsFillArrowRightCircleFill
             className={styles.icon}
             onClick={() => handleClickMenuSlides('right')}
-            style={{ right: '10px', bottom: "18vh"}}
+            style={{ right: '10px', bottom: '18vh' }}
           />
         </div>
         <div className={styles.menuWrapper}>

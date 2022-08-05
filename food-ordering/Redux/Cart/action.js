@@ -22,17 +22,17 @@ export const removeFromCart = (product) => {
     payload: {
       id: product.id,
       name: product.name,
-      note: product.note
+      note: product.note,
     },
   };
 };
 
 export const deleteFormCart = (product) => {
-  return{
+  return {
     type: DELETE,
     payload: {
       id: product.id,
-      note: product.note
-    }
+      note: product.note,
+    },
   };
 };

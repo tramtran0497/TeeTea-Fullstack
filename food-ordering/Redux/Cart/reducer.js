@@ -5,23 +5,23 @@ const INITIAL_STATE = {
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
-  const existInCart = state.listCarts?.find((item) =>  {
-    if(action.payload?.id === item.id && action.payload?.note === item.note) {
-      return true
+  const existInCart = state.listCarts?.find((item) => {
+    if (action.payload?.id === item.id && action.payload?.note === item.note) {
+      return true;
+    } else {
+      return false;
     }
-    else {
-      return false
-  }});
+  });
   switch (action.type) {
     case ADD_TO_CART:
       if (existInCart) {
         const newState = {
           ...state,
-          listCarts: state.listCarts.map((item) =>{
-            if( item.id === action.payload.id ) {
-              return { ...item, qty: (item.qty + action.payload.qty)}
+          listCarts: state.listCarts.map((item) => {
+            if (item.id === action.payload.id) {
+              return { ...item, qty: item.qty + action.payload.qty };
             } else {
-              return item
+              return item;
             }
           }),
         };
@@ -63,7 +63,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       }
       return state;
     case DELETE:
-      if(existInCart) {
+      if (existInCart) {
         const indexOfItem = state.listCarts.indexOf(existInCart);
         state.listCarts.splice(indexOfItem, 1);
         const newState = {

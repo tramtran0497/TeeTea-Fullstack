@@ -14,7 +14,7 @@ export const fetchJobs = () => async (dispatch) => {
         title: job.title,
         quantity: job.quantity,
         image: job.image,
-        description: job.description
+        description: job.description,
       };
     });
     dispatch({

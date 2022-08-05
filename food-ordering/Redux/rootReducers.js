@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   fetchNews: fetchNewsReducer,
   fetchEvents: fetchEventsReducer,
   fetchJobs: fetchJobsReducer,
-  fetchOneProduct: fetchOneProductReducer
+  fetchOneProduct: fetchOneProductReducer,
 });
 
 export default rootReducer;

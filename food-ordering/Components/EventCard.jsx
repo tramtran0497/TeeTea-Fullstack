@@ -10,7 +10,7 @@ export const EventCard = ({ event }) => {
   return (
     <div className={styles.eventCard}>
       <div className={styles.left}>
-        <Image src={event.image} width="200px" height="180px"/>
+        <Image src={event.image} width="200px" height="180px" />
       </div>
       <div className={styles.right}>
         <h3>{event.title}</h3>

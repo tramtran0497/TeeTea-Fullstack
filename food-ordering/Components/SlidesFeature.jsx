@@ -60,13 +60,8 @@ export const SlidesFeature = () => {
               <p>{news.subtitle}</p>
             </div>
             <div className={styles.imgWrapper}>
-              <Image
-                src={news.image}
-                alt={news.title}
-                layout="fill"
-              />
+              <Image src={news.image} alt={news.title} layout="fill" />
             </div>
-            
           </div>
         ))}
       </div>

@@ -1,4 +1,8 @@
-import { FETCH_EVENTS_REQUEST, FETCH_EVENTS_SUCCESS, FETCH_EVENTS_FAILURE } from './fetchEvents-types';
+import {
+  FETCH_EVENTS_REQUEST,
+  FETCH_EVENTS_SUCCESS,
+  FETCH_EVENTS_FAILURE,
+} from './fetchEvents-types';
 
 export const fetchEvents = () => async (dispatch) => {
   try {
@@ -14,7 +18,7 @@ export const fetchEvents = () => async (dispatch) => {
         title: event.title,
         firstWord: event.firstWord,
         image: event.image,
-        description: event.description
+        description: event.description,
       };
     });
     dispatch({
