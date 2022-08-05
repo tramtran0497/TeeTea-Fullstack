@@ -6,7 +6,7 @@ import { ThemeContext, ThemeUpdateContext } from '../ReactHooks/ThemeContext';
 import { useSelector } from 'react-redux';
 import { NavBarUser } from './NavBarUser';
 import Image from './Image';
-import logo from '../public/img/logo.png';
+import logo from '../public/image/logo.png';
 
 export const Header = () => {
   const [isShowed, setIsShow] = useState(false);

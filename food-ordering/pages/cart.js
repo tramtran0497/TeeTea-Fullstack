@@ -21,7 +21,7 @@ export default function Carts() {
           {listCarts.length ? (
             listCarts.map((cart) => <CartCard product={cart} key={cart.id} />)
           ) : (
-            <p>Your cart is empty. Please select your meals!</p>
+            <p style={{margin: "30px"}}>Your cart is empty. Please select your meals!</p>
           )}
         </div>
       </div>
@@ -46,6 +46,7 @@ export default function Carts() {
           <h3>Total</h3>
           <p>€ {totalAmountBill}</p>
         </div>
+        <button className={styles.btn}>Pay Now</button>
       </div>
     </div>
   );

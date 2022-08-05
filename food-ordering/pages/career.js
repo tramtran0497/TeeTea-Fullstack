@@ -1,7 +1,6 @@
 import styles from '../styles/Career.module.css';
 import { JobCard } from '../Components/JobCard';
 import Head from 'next/head';
-import { recruitList } from '../fakeData/MenuData';
 import React, { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { FcCheckmark } from 'react-icons/fc';

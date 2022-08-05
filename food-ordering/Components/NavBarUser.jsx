@@ -1,7 +1,6 @@
 import { useEffect, useContext } from 'react';
 import styles from '../styles/NavBarUser.module.css';
 import Image from './Image';
-import user1 from '../public/img/user-1.avif';
 import {
   IoSettingsOutline,
   IoLogOutOutline,
@@ -31,7 +30,7 @@ export const NavBarUser = ({ style }) => {
       <div className={styles.containerUser} style={{ transform: `translateX(${style})` }}>
         <div className={styles.top}>
           <div className={styles.imgWrapper}>
-            <Image src={user1} className={styles.img} />
+            <Image src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80" className={styles.img} />
           </div>
           <div className={styles.nameAccount}>
             <h2>Name Account</h2>
