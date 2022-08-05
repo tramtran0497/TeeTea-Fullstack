@@ -35,8 +35,7 @@ export const ProductCard = ({ product }) => {
         image: product.image,
         price: product.price[0],
         note: 'Make my meal as normally',
-        qty: 1
-      }));
+      }, 1));
     } else {
       dispatch(removeFromCart(product));
     }

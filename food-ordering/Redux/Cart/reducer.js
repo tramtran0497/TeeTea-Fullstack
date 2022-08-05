@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from './types';
+import { ADD_TO_CART, REMOVE_FROM_CART, DELETE } from './types';
 
 const INITIAL_STATE = {
   listCarts: [],
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 const cartReducer = (state = INITIAL_STATE, action) => {
   const existInCart = state.listCarts?.find((item) =>  {
-    if(action.payload?.id === item.id) {
+    if(action.payload?.id === item.id && action.payload?.note === item.note) {
       return true
     }
     else {
@@ -15,7 +15,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       if (existInCart) {
-        console.log("Exist");
         const newState = {
           ...state,
           listCarts: state.listCarts.map((item) =>{
@@ -28,8 +27,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         };
         return newState;
       } else {
-        console.log("No Exist");
-
         const newState = {
           ...state,
           listCarts: [
@@ -63,6 +60,17 @@ const cartReducer = (state = INITIAL_STATE, action) => {
           };
           return newState;
         }
+      }
+      return state;
+    case DELETE:
+      if(existInCart) {
+        const indexOfItem = state.listCarts.indexOf(existInCart);
+        state.listCarts.splice(indexOfItem, 1);
+        const newState = {
+          ...state,
+          listCarts: [...state.listCarts],
+        };
+        return newState;
       }
       return state;
     default:

@@ -94,6 +94,10 @@
   outline-color: black;
 }
 
+.icon {
+  font-size: 20px;
+}
+
 .btn {
   width: 13%;
   padding: 10px 5px;

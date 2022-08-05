@@ -16,7 +16,6 @@ export default function Product() {
   const {product, loading, error} = useSelector(state => state.fetchOneProduct);
   
   const [item, setItem] = useState({});
-  // const { listCarts } = useSelector((state) => state.cart);
 
   useEffect(() => {
     // Check id before dispatch an action
@@ -43,9 +42,8 @@ export default function Product() {
       image: item.image,
       price: item.price[0],
       note,
-      qty,
     };
-    dispatch(addToCart(orderedProduct));
+    dispatch(addToCart(orderedProduct, qty));
     event.target.reset();
   };
 
@@ -104,12 +102,11 @@ export default function Product() {
               id="note"
               name="note"
             />
-
             <div className={styles.qtyWrapper}>
               <label className={styles.title} htmlFor="quantity">
                 Quantity
               </label>
-              <input type="number" id="quantity" name="quantity" min="0" className={styles.qty} />
+              <input type="number" id="quantity" name="quantity" min="0" className={styles.qty}/>
             </div>
             <input type="submit" value="Add Cart" className={styles.btn} />
           </form>

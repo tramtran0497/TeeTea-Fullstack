@@ -21,7 +21,7 @@ export const ChangeQty = ({ product }) => {
 
   const handleClick = (act) => {
     if (act === 'add') {
-      dispatch(addToCart(product));
+      dispatch(addToCart(product, 1));
     } else if (act === 'subtract') {
       dispatch(removeFromCart(product));
     }
