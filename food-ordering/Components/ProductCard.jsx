@@ -1,88 +1,109 @@
 import styles from '../styles/ProductCard.module.css';
 import Image from './Image';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { addToCart, removeFromCart } from '../Redux/Cart/action';
 import Link from 'next/link';
-import { IoCart, IoEyeSharp, IoHeart } from 'react-icons/io5';
+import { BsFillCartDashFill, BsFillEyeFill, BsHeartFill, BsFillCartPlusFill} from "react-icons/bs";
+
 import { love } from '../Redux/Love/actions';
 
 export const ProductCard = ({ product }) => {
-  const [isAdded, setIsAdded] = useState(false);
+  const [showingCartPlus, setShowingCartPlus] = useState(true);
   const [isLoved, setIsLoved] = useState(false);
+  const [displayProduct, setDisplayProduct] = useState({});
 
+  const {listCarts} = useSelector(state => state.cart);
+  const {listLove} = useSelector(state => state.love);
   const dispatch = useDispatch();
 
-  const toggleAddCart = (item) => {
-    if (product.id === item.id) {
-      setIsAdded(!isAdded);
+  useEffect(() => {
+    if(product){
+      setDisplayProduct(product);
     }
+  },[product])
+
+  useEffect(() => {
+    const foundItemInCart = listCarts && listCarts.find(cart => cart.id === displayProduct.id);
+    if(foundItemInCart) {
+      setShowingCartPlus(false)
+    } 
+  },[listCarts, displayProduct]);
+
+  const handleAdd = (item) => {
+    setShowingCartPlus(false);
+    dispatch(
+      addToCart(
+        {
+          id: displayProduct.id,
+          name: displayProduct.name,
+          image: displayProduct.image,
+          price: displayProduct.price[0],
+          note: 'Make my meal as normally',
+        },
+        1
+      )
+    );
   };
 
+  const handleRemove = (item) => {
+    setShowingCartPlus(true);
+    dispatch(removeFromCart({
+      id: displayProduct.id,       
+      note: 'Make my meal as normally',
+    },));
+  }
+
   const toggleAddLove = (item) => {
-    if (product.id === item.id) {
-      setIsLoved(!isLoved);
-      dispatch(love(product));
-    }
+    setIsLoved(!isLoved);
+    dispatch(love(displayProduct));
   };
 
   useEffect(() => {
-    if (isAdded === true) {
-      dispatch(
-        addToCart(
-          {
-            id: product.id,
-            name: product.name,
-            image: product.image,
-            price: product.price[0],
-            note: 'Make my meal as normally',
-          },
-          1
-        )
-      );
-    } else {
-      dispatch(removeFromCart(product));
+    const itemInLove = listLove && listLove.find(love => love.id === displayProduct.id);
+    if(itemInLove) {
+      setIsLoved(true);
     }
-  }, [isAdded]);
+  },[listLove, displayProduct]);
 
-  // Detail product
-  // useEffect(() => console.log(product));
-
-  const customLoader = ({ src }) => {
-    return src;
-  };
-
-  if (!product) {
+  if (!displayProduct) {
     return <div>There is nothing!</div>;
   } else {
     return (
       <div className={styles.wrapper}>
         <div className={styles.imgWrapper}>
-          <Image src={product.image} alt={product.name} layout="fill" />
+          <Image src={displayProduct.image ? displayProduct.image : "me.png"} alt={displayProduct.name} layout="fill" />
         </div>
         <div className={styles.content}>
-          <h3>{product.name}</h3>
+          <h3>{displayProduct.name}</h3>
           <div className={styles.icons}>
-            <IoCart
-              className={styles.icon}
-              onClick={() => toggleAddCart(product)}
-              style={{ color: isAdded ? 'rgb(235, 117, 136)' : '' }}
-            />
+            {
+              showingCartPlus ? (
+                <BsFillCartPlusFill
+                className={styles.icon}
+                onClick={() => handleAdd(displayProduct)}
+                />
+              ) : (
+                <BsFillCartDashFill
+                className={styles.icon}
+                onClick={() => handleRemove(displayProduct)}
+                />
+              )
+            }
             <Link
               href={{
                 pathname: '/product/[id]',
-
-                query: { id: `${product.id}` },
+                query: { id: `${displayProduct.id}` },
               }}
             >
               <a>
-                <IoEyeSharp className={styles.icon} />
+                <BsFillEyeFill className={styles.icon} />
               </a>
             </Link>
-            <IoHeart
+            <BsHeartFill
               className={styles.icon}
-              onClick={() => toggleAddLove(product)}
-              style={{ color: isLoved ? 'rgb(235, 117, 136)' : '' }}
+              onClick={() => toggleAddLove(displayProduct)}
+              style={{ color: isLoved  ? 'rgb(235, 117, 136)' : '' }}
             />
           </div>
         </div>

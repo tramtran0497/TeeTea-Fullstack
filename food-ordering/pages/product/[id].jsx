@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../Redux/Cart/action';
 import { fetchOneProduct } from '../../Redux/FetchOneProduct/fetchOneProduct-actions';
-import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
+import { FaTruckLoading, FaRegSadCry, FaPlus, FaMinus } from 'react-icons/fa';
 
 export default function Product() {
   const router = useRouter();
@@ -14,8 +14,9 @@ export default function Product() {
 
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector((state) => state.fetchOneProduct);
-
+  const {listCarts} = useSelector(state => state.cart);
   const [item, setItem] = useState({});
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     // Check id before dispatch an action
@@ -28,14 +29,21 @@ export default function Product() {
     setItem(product);
   }, [product]);
 
-  // useEffect(() => console.log("ITEM", item))
+  useEffect(() => {
+    // console.log(listCarts)
+    const foundCart = listCarts?.find((cart) => cart.id === item.id);
+    if (foundCart) {
+      setQuantity(foundCart.qty);
+    } else {
+      setQuantity(0);
+    }
+  }, [listCarts, item]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const formObj = Object.fromEntries(data.entries());
     const note = formObj.note;
-    const qty = parseInt(formObj.quantity);
     const orderedProduct = {
       id: item.id,
       name: item.name,
@@ -43,7 +51,7 @@ export default function Product() {
       price: item.price[0],
       note,
     };
-    dispatch(addToCart(orderedProduct, qty));
+    dispatch(addToCart(orderedProduct, quantity));
     event.target.reset();
   };
 
@@ -106,9 +114,11 @@ export default function Product() {
             />
             <div className={styles.qtyWrapper}>
               <label className={styles.title} htmlFor="quantity">
-                Quantity
+              Quantity
               </label>
-              <input type="number" id="quantity" name="quantity" min="0" className={styles.qty} />
+              <FaMinus className={styles.icon} onClick={() => quantity < 1 ? setQuantity(0) : setQuantity(quantity - 1)}/>
+              <p className={styles.qty}>{quantity}</p>
+              <FaPlus className={styles.icon} onClick={() => setQuantity(quantity + 1)}/>
             </div>
             <input type="submit" value="Add Cart" className={styles.btn} />
           </form>

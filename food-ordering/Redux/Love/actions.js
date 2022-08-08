@@ -5,7 +5,7 @@ export const love = (product) => {
     type: LOVE,
     payload: {
       name: product.name,
-      id: product._id,
+      id: product.id,
     },
   };
 };

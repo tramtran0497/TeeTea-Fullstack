@@ -1,1 +1,1 @@
-export const LOVE = 'LOVEd';
+export const LOVE = 'LOVE';

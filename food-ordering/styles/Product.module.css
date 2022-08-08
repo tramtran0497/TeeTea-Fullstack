@@ -63,6 +63,7 @@
   font-size: 22px;
   margin: 20px 0;
   font-weight: 500;
+  text-decoration: underline;
 }
 
 .info p {
@@ -79,6 +80,7 @@
 }
 
 .qtyWrapper {
+  width: 80%;
   display: flex;
   align-items: center;
 }
@@ -86,7 +88,7 @@
 .qty {
   height: 30px;
   width: 80px;
-  font-size: 18px;
+  font-size: 23px;
   text-align: center;
 }
 
