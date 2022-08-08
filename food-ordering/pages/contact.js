@@ -1,9 +1,9 @@
 import styles from '../styles/Contact.module.css';
 import Head from 'next/head';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import emailjs from '@emailjs/browser';
 import { FcCheckmark } from 'react-icons/fc';
-
+import {ThemeContext} from '../ReactHooks/ThemeContext';
 export default function contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -12,6 +12,7 @@ export default function contact() {
   const [message, setMessage] = useState('');
   const [isSent, setIsSent] = useState(false);
   const form = useRef();
+  const darkTheme = useContext(ThemeContext);
 
   useEffect(() => {
     const timeId = setTimeout(() => {
@@ -43,7 +44,7 @@ export default function contact() {
           setIsSent(false);
         }
       );
-
+ 
     setName('');
     setEmail('');
     setPhone('');
@@ -68,7 +69,7 @@ export default function contact() {
           <input
             type="text"
             placeholder="Leave your name..."
-            className={styles.input}
+            className= {`${darkTheme ? styles.inputDark : styles.input}`}
             name="name"
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -77,7 +78,7 @@ export default function contact() {
           <input
             type="email"
             placeholder="Leave your email address..."
-            className={styles.input}
+            className= {`${darkTheme ? styles.inputDark : styles.input}`}
             name="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -87,7 +88,7 @@ export default function contact() {
             type="tel"
             pattern="^\d{3}-\d{3}-\d{4}$"
             placeholder="Phone number with format XXX-XXX-XXXX"
-            className={styles.input}
+            className= {`${darkTheme ? styles.inputDark : styles.input}`}
             name="phoneNumber"
             value={phone}
             onChange={(event) => setPhone(event.target.value)}
@@ -96,7 +97,7 @@ export default function contact() {
           <select
             name="case"
             id="case"
-            className={styles.select}
+            className= {`${darkTheme ? styles.selectDark : styles.select}`}
             value={caseContact}
             onChange={(event) => setCaseContact(event.target.value)}
             required
@@ -110,13 +111,13 @@ export default function contact() {
           <input
             type="text"
             placeholder="Leave your words..."
-            className={styles.input}
+            className= {`${darkTheme ? styles.inputDark : styles.input}`}
             name="message"
             value={message}
             onChange={(event) => setMessage(event.target.value)}
             required
           />
-          <button className={styles.btn}>Send</button>
+          <button className={`${darkTheme ? styles.btnDark:styles.btn}`}>Send</button>
         </form>
         {isSent ? (
           <p className={styles.formCheck}>
