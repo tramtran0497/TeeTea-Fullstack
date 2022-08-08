@@ -31,7 +31,7 @@
   overflow: hidden;
 }
 
-.container h1 {
+.titleLight {
   width: 95%;
   height: fit-content;
   font-weight: 500;
@@ -40,10 +40,20 @@
   padding-right: 20px;
 }
 
+.titleDark {
+  width: 95%;
+  height: fit-content;
+  font-weight: 500;
+  text-align: end;
+  padding-right: 20px;
+  border-right: 3px solid white;
+}
+
 .btnWrapper {
   width: 100%;
   text-align: center;
   margin-left: 60px;
+  z-index: 0;
 }
 
 .btn {
@@ -53,11 +63,27 @@
   background-color: transparent;
   cursor: pointer;
   transition: all 0.25s ease;
+  border: 2px solid black;
 }
-
 .btn:hover {
   color: white;
   background-color: black;
+}
+
+.btnDark {
+  padding: 20px 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btnDark:hover {
+  color: black;
+  background-color: white;
 }
 
 .navBarMenu {

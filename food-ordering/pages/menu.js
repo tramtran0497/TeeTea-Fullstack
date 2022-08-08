@@ -1,11 +1,12 @@
 import styles from '../styles/Menu.module.css';
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { MenuSlidesCard } from '../Components/MenuSlidesCard';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { MenuList } from '../Components/MenuList';
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import { FaTruckLoading, FaRegSadCry } from 'react-icons/fa';
+import { ThemeContext } from '../ReactHooks/ThemeContext';
 
 export default function Menu() {
   const [index, setIndex] = useState(0);
@@ -17,6 +18,7 @@ export default function Menu() {
   const listProducts = useSelector((state) => state.fetchProduct.listProducts);
   const loading = useSelector((state) => state.fetchProduct.loading);
   const error = useSelector((state) => state.fetchProduct.error);
+  const darkTheme = useContext(ThemeContext);
 
   useEffect(() => {
     listProducts.length &&
@@ -67,11 +69,11 @@ export default function Menu() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>MENU</h1>
+      <h1 className={`${darkTheme ? styles.titleDark : styles.titleLight}`}>MENU</h1>
       <div className={styles.btnWrapper}>
-        <button className={styles.btn}>ORDER PICKUP</button>
-        <button className={styles.btn}>ORDER DELIVERY</button>
-        <button className={styles.btn}>GIFT FOR FRIENDS AND FAMILY</button>
+        <button className={`${styles.btn} ${darkTheme ? styles.btnDark : ""}`}>ORDER PICKUP</button>
+        <button className={`${styles.btn} ${darkTheme ? styles.btnDark : ""}`}>ORDER DELIVERY</button>
+        <button className={`${styles.btn} ${darkTheme ? styles.btnDark : ""}`}>GIFT FOR FRIENDS AND FAMILY</button>
       </div>
       <div className={styles.navBarMenu}>
         <ul className={styles.navList}>
