@@ -30,11 +30,19 @@
 
 .eventCard {
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  margin: 20px 0;
+}
+
+.eventCardDark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgb(95, 93, 93);
+  border-bottom: 1px solid rgb(95, 93, 93);
   margin: 20px 0;
 }
 
