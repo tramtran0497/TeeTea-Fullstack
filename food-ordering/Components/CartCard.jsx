@@ -8,7 +8,6 @@ import { deleteFormCart } from '../Redux/Cart/action';
 export default function CartCard({ product }) {
   const dispatch = useDispatch();
   const handleDelete = () => {
-    console.log('deletehandle', product);
     dispatch(deleteFormCart(product));
   };
   return (

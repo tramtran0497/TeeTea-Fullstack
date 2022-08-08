@@ -1,14 +1,16 @@
 import styles from '../../styles/Product.module.css';
 import Image from '../../Components/Image';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../Redux/Cart/action';
 import { fetchOneProduct } from '../../Redux/FetchOneProduct/fetchOneProduct-actions';
 import { FaTruckLoading, FaRegSadCry, FaPlus, FaMinus } from 'react-icons/fa';
-
+import {ThemeContext} from '../../ReactHooks/ThemeContext.js';
 export default function Product() {
+  const darkTheme = useContext(ThemeContext);
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -120,7 +122,7 @@ export default function Product() {
               <p className={styles.qty}>{quantity}</p>
               <FaPlus className={styles.icon} onClick={() => setQuantity(quantity + 1)}/>
             </div>
-            <input type="submit" value="Add Cart" className={styles.btn} />
+            <input type="submit" value="Add Cart" className={`${darkTheme ? styles.btnDark : styles.btn}`} />
           </form>
         </div>
       </div>

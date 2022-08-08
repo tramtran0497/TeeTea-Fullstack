@@ -23,6 +23,7 @@
   display: flex;
   background-color: rgb(240, 239, 239);
   box-shadow: 1px 4px 9px -2px #000000;
+  color: black;
 }
 
 .wrapperLeft {
