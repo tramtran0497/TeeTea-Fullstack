@@ -26,9 +26,49 @@ export const ProductCard = ({ product }) => {
   useEffect(() => {
     const foundItemInCart = listCarts && listCarts.find(cart => cart.id === displayProduct.id);
     if(foundItemInCart) {
+      // --------------
+      // setHasExistedInCart(true)
+      // -----------------
       setShowingCartPlus(false)
-    } 
+
+    } else {
+      // setHasExistedInCart(false)
+
+      setShowingCartPlus(true)
+
+    }
   },[listCarts, displayProduct]);
+ // -------------------------------------------------------
+
+//  const [hasExistedInCart, setHasExistedInCart] = useState(false);
+
+//   const addOrRemoveItemFromCart = (item) => {
+//     if(!hasExistedInCart) {
+//       setHasExistedInCart(true)
+
+//       dispatch(
+//         addToCart(
+//           {
+//             id: displayProduct.id,
+//             name: displayProduct.name,
+//             image: displayProduct.image,
+//             price: displayProduct.price[0],
+//             note: 'Make my meal as normally',
+//           },
+//           1
+//         )
+//       );
+//     } else {
+//       setHasExistedInCart(false)
+//       dispatch(removeFromCart({
+//         id: displayProduct.id,       
+//         note: 'Make my meal as normally',
+//       },));
+//     }
+
+//   };
+
+ // -------------------------------------------------------
 
   const handleAdd = (item) => {
     setShowingCartPlus(false);
@@ -77,6 +117,12 @@ export const ProductCard = ({ product }) => {
         <div className={styles.content}>
           <h3>{displayProduct.name}</h3>
           <div className={styles.icons}>
+            {/*<BsFillCartPlusFill
+            className={styles.icon}
+            onClick={() => addOrRemoveItemFromCart(displayProduct)}
+            style={{ color: hasExistedInCart ? 'red' : 'white' }}
+
+            /> */}
             {
               showingCartPlus ? (
                 <BsFillCartPlusFill
@@ -87,6 +133,8 @@ export const ProductCard = ({ product }) => {
                 <BsFillCartDashFill
                 className={styles.icon}
                 onClick={() => handleRemove(displayProduct)}
+                style={{ color: 'rgb(235, 117, 136)' }}
+
                 />
               )
             }

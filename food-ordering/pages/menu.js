@@ -35,6 +35,20 @@ export default function Menu() {
       });
   }, [listProducts]);
 
+  // window global Objects - example for lifecycle 
+  useEffect(() => {
+
+    const fetchData = () => {
+      console.log("Fetching data....");
+    }
+    window.addEventListener('scroll', fetchData)
+
+    return () => {
+      console.log("Remove event .... ");
+      window.removeEventListener('scroll', fetchData)
+    }
+  });
+
   // useEffect(() => console.log("Check in menu", listDisplayMain, listDisplayDrink, listDisplayLD, listDisplaySnack));
 
   const handleClickNavBar = (name) => {
@@ -70,11 +84,14 @@ export default function Menu() {
       </Head>
 
       <h1 className={`${darkTheme ? styles.titleDark : styles.titleLight}`}>MENU</h1>
+      {/*
       <div className={styles.btnWrapper}>
-        <button className={`${styles.btn} ${darkTheme ? styles.btnDark : ""}`}>ORDER PICKUP</button>
-        <button className={`${styles.btn} ${darkTheme ? styles.btnDark : ""}`}>ORDER DELIVERY</button>
-        <button className={`${styles.btn} ${darkTheme ? styles.btnDark : ""}`}>GIFT FOR FRIENDS AND FAMILY</button>
-      </div>
+          <button className={`${styles.btn} ${darkTheme ? styles.btnDark : ""}`}>ORDER PICKUP</button>
+          <button className={`${styles.btn} ${darkTheme ? styles.btnDark : ""}`}>ORDER DELIVERY</button>
+          <button className={`${styles.btn} ${darkTheme ? styles.btnDark : ""}`}>GIFT FOR FRIENDS AND FAMILY</button>
+        </div>
+      */}
+     
       <div className={styles.navBarMenu}>
         <ul className={styles.navList}>
           <li className={styles.navItem}>LUNCH & DINNER</li>

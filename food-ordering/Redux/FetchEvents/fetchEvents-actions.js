@@ -10,6 +10,7 @@ export const fetchEvents = () => async (dispatch) => {
       type: FETCH_EVENTS_REQUEST,
     });
     const url = `https://teetea-api.herokuapp.com/events`;
+    
     const responseAPI = await fetch(url);
     const responseJSON = await responseAPI.json();
     const listEvents = responseJSON.map((event) => {

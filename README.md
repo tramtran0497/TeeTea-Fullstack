@@ -23,22 +23,20 @@ Current:
 #### Having no account
 1. ~~Designing and creating content for `Delivery Policy and Services`.~~ `DONE`
 2. ~~Application job form is sent directly the TeeTea email and customer service contact through `Emailjs`.~~ `DONE`
-3. Fetching data method get all products/ news/ events/ jobs from API. (fetch successfully however data is still empty)
-4. Setup saving list cart, theme at local storage. 
-5. Redesign `Sign up` page.
+3. ~~Fetching data method get all products/ news/ events/ jobs from API. (fetch successfully however data is still empty)~~ `DONE`
+4. Setup saving list cart, theme at local storage. (Update later)
+5. Redesign `Sign up` page. (Update later)
 6. ~~Redesign when have no items in cart on `Cart` page.~~ `DONE`
 7. when clicking each 3 buttons status order, it's background color is black and showing the status order on side.
-8. Hiding/ disappearance User sidebar when clicking others.
-9. ~~At each product page, using redux to add cart after fill a form order each product.~~ `DONE`
+8. ~~At each product page, using redux to add cart after fill a form order each product.~~ `DONE`
 
-#### Have an account
-1. Connecting Login/ Logout/ Sign up with API method post create user/ logout/ login.
-2. Customer contact form is sent directly to `Emailjs` and confirm email is sent back to customer by `SendGrid`(Asking signup/ login before creating a form).
-3. Designing and creating content for `Profile` Page, and then connect between API and client.
+#### Have an account (Update later)
+1. Connecting Login/ Logout/ Sign up with API method post create user/ logout/ login. (I will do these features as separate parts)
+2. ~~Customer contact form is sent directly to `Emailjs` and confirm email is sent back to customer by `SendGrid`(Asking signup/ login before creating a form).~~ `DONE`
+3. Designing and creating content for `Profile` Page, and then connect between API and client. (I will do this feature later, after Login/Logout and register)
 4. Designing and make content for `Order` page, a form create an order - method post API (Asking signup/ login before creating a form). Designing and make content for detail each order.
-5. Fetching all orders to show history order.
+5. ~~Fetching all orders to show history order.~~ `DONE`
 6. Creating sending email to change password when customer forgets their password.
-7. 
 
 # Deploy API to Heroku
 
@@ -60,6 +58,6 @@ Demo API https://teetea-api.herokuapp.com/jobs
 # Deploy Client UI to Netlify 
 
 The below deployed application using fake data to run this app, the new version will be shown soon.
-Demo App: https://62a59ada34343a381257ac12--cosmic-biscochitos-6214d8.netlify.app/
+Demo App: https://cosmic-biscochitos-6214d8.netlify.app/
 
 
