@@ -60,4 +60,3 @@ Demo API https://teetea-api.herokuapp.com/jobs
 The below deployed application using fake data to run this app, the new version will be shown soon.
 Demo App: https://cosmic-biscochitos-6214d8.netlify.app/
 
-
