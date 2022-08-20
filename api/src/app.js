@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use(cors({
-  origin: process.env.ALLOW_CORS.split(", ")
+  origin: process.env.ALLOW_CORS?.split(", ")
 }));
 
 app.use(productRouter);
