@@ -21,8 +21,8 @@ coverage
 
 # API keys and secrets
 **.env
-config/dev.env
-config/test.env
+config/**
+
 
 # Dependency directory
 node_modules
