@@ -28,14 +28,22 @@ router.post(
   auth,
   upload.single("avatar"),
   async (req, res) => {
-    // config image with size and type image png
-    const buffer = await sharp(req.file.buffer)
-      .resize({ width: 250, height: 250 })
-      .png()
-      .toBuffer();
-    req.user.avatar = buffer;
-    await req.user.save();
-    res.send("Uploaded your avatar!");
+    try{
+      if(!req.file){
+        throw new Error("No image!");
+      }
+      // config image with size and type image png
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 250, height: 250 })
+        .png()
+        .toBuffer();
+      req.user.avatar = buffer;
+      await req.user.save();
+      res.send("Uploaded your avatar!");
+    }catch (error) {
+      res.status(400).send({ error: error.message });
+    }
+  
   },
   (error, req, res, next) => {
     res.status(400).send({ error: error.message });
@@ -94,7 +102,10 @@ router.get("/users", [auth, adminAuth], async (req, res) => {
 
 router.get("/user/username", auth, async (req, res) => {
   try {
-    const user = await User.findOne(req.user._id);
+    console.log("AAAAAAAAAA",req.user._id)
+    const user = await User.findById(req.user._id);
+    console.log("======================");
+    console.log(user)
     res.send(user);
   } catch (error) {
     res.status(400).send({ error: error.message });
