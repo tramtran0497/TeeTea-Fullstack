@@ -12,15 +12,13 @@ export default function Login() {
 
   const [account, setAccount] = useState({ email: '', password: '' });
  const dispatch = useDispatch()
+//  const {loading, success, error, userInfo} = useSelector(state => state.userLoggedIn)
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(logInUser(account))
-    router.push("/loggedIn")
-  };
+    router.push("/loggedIn")  
 
-  useEffect(() => {
-    // console.log("err", err)
-  });
+  };
   return (
     <div className={styles.container}>
       <Head>

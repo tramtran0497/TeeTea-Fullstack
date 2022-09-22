@@ -14,8 +14,15 @@ export const logInUser = ({ email, password }) => {
         fetch(url, requestOptions)
         .then(res => res.json())
         .then(res => {
-            dispatch(loggedInSuccess(res.user))
-            sessionStorage.setItem("token", res.token)
+            console.log("WHAT",res);
+            if(res.user && res.token) {
+                console.log("VVVVOOO")
+                dispatch(loggedInSuccess(res.user))
+                sessionStorage.setItem("token", res.token)
+            } else{
+                console.log("VO MA ERROR")
+                throw new Error("Incorrect Account")
+            }
         })
         .catch(err => {
             dispatch(failLoggedIn(err.message))

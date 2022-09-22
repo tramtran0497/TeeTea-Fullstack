@@ -2,13 +2,13 @@ import { FETCH_POST_LOGIN_ERROR, FETCH_POST_LOGIN_LOADING, FETCH_POST_LOGIN_SUCC
 
 const initialState = {
     userInfo: {},
-    isLoading: false,
+    loading: false,
     error: "", 
     success: false
 }
 
 function loggedInReducer(state = initialState, action) {
-    console.log("reducer", action.payload)
+    console.log("reducer1111", action)
   switch (action.type) {
     case FETCH_POST_LOGIN_LOADING:
       return {

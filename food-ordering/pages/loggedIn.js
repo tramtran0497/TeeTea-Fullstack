@@ -10,29 +10,25 @@ import {
   IoBagHandleOutline,
 } from 'react-icons/io5';
 import { MdOutlineDeliveryDining } from 'react-icons/md';
-import { FaRegSadCry } from 'react-icons/fa';
+import { FaRegSadCry, FaTruckLoading } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 export default function LoggedIn() {
   const darkTheme = useContext(ThemeContext);
-  const [user, setUser] = useState({})
-  const {userInfo} = useSelector(state => state.userLoggedIn)
+  const [user, setUser] = useState({});
+  const { userInfo, success, loading, error } = useSelector((state) => state.userLoggedIn);
   useEffect(() => {
-    console.log("Check",userInfo);
-    if(userInfo){
-        setUser(userInfo)
+    if (userInfo) {
+      setUser(userInfo);
     }
   }, [userInfo]);
- 
-  if (!user) {
-    return (
-      <div className={styles.containerLoading}>
-        Opps <FaRegSadCry style={{ fontSize: '30px', margin: '20px' }} />
-        ...Problems happened! Did you log in correct account? Please contact us for helping, thank
-        you.
-      </div>
-    );
-  } else {
+  if (loading)
+  return (
+    <div className={styles.containerLoading}>
+      Loading... <FaTruckLoading style={{ fontSize: '30px', margin: '20px' }} />
+    </div>
+  );
+  else if (userInfo && success) {
     return (
       <div className={styles.container}>
         <Head>
@@ -45,7 +41,8 @@ export default function LoggedIn() {
           style={{ backgroundColor: darkTheme ? 'black' : 'white' }}
         >
           <h3>
-            <IoCheckmarkCircleSharp className={styles.icon} /> {`Successfully logged in, ${user.name}. Choose our services and chill your day!`}
+            <IoCheckmarkCircleSharp className={styles.icon} />
+            {`Successfully logged in, ${user.name}. Choose our services and chill your day!`}
           </h3>
           <div className={styles.offerList}>
             <h4>OUR SERVICES</h4>
@@ -75,6 +72,13 @@ export default function LoggedIn() {
             </Link>
           </div>
         </div>
+      </div>
+    );
+  } else{
+    return (
+      <div className={styles.containerLoading}>
+        Opps <FaRegSadCry style={{ fontSize: '30px', margin: '20px' }} />
+        ...Problems happened! Page Not Found. You need to login before visting this page. Thank you!
       </div>
     );
   }
