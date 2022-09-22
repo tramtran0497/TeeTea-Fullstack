@@ -6,6 +6,7 @@ import fetchJobsReducer from './FetchJobs/fetchJobs-reducer';
 import fetchNewsReducer from './FetchNews/fetchNews-reducer';
 import fetchOneProductReducer from './FetchOneProduct/fetchOneProduct-reducer';
 import loveReducer from './Love/reducer';
+import loggedInReducer from './User/Auth/reducer';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   fetchEvents: fetchEventsReducer,
   fetchJobs: fetchJobsReducer,
   fetchOneProduct: fetchOneProductReducer,
+  userLoggedIn: loggedInReducer,
 });
 
 export default rootReducer;

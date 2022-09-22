@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import styles from '../styles/NavBarUser.module.css';
 import Image from './Image';
 import {
@@ -12,11 +12,9 @@ import {
   IoPersonAddOutline,
 } from 'react-icons/io5';
 import Link from 'next/link';
-import { AuthenticationContext } from '../ReactHooks/AutheticationContext';
 
 export const NavBarUser = ({ style }) => {
-  const { logIn, authenticatedAccount } = useContext(AuthenticationContext);
-
+const [logIn, setLogIn] = useState(false)
   const handleLogOut = (e) => {
     e.preventDefault();
     authenticatedAccount({});
@@ -25,12 +23,12 @@ export const NavBarUser = ({ style }) => {
     // console.log("logIn", logIn);
   });
 
-  if (logIn) {
+  if (logIn) { 
     return (
       <div className={styles.containerUser} style={{ transform: `translateX(${style})` }}>
         <div className={styles.top}>
           <div className={styles.imgWrapper}>
-            <Image src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80" className={styles.img} />
+            <Image src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80" className={styles.img} layout="fill" />
           </div>
           <div className={styles.nameAccount}>
             <h2>Name Account</h2>
